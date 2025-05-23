@@ -3,10 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MSC Seascape Cruise Packing Guide">
-    <title>Packing Guide - MSC Seascape 2025</title>
+    <meta name="description" content="Complete MSC Seascape Cruise Packing Guide with Interactive Checklist">
+    <title>Complete Packing Guide - MSC Seascape 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="common.css">
+    <style>
+        .site-header {
+            background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </script>
+</body>
+</html>
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0c4a6e;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0369a1;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #bae6fd;
+            padding-bottom: 0.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0f2fe;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 4px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .checklist-item:hover {
+            background-color: #f0f9ff;
+            border-color: #0369a1;
+        }
+        .checklist-item.checked {
+            background-color: #dcfce7;
+            border-color: #16a34a;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+        }
+        .category-header {
+            background: linear-gradient(135deg, #0369a1, #0284c7);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 16px 0 8px 0;
+            text-align: center;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #16a34a, #22c55e);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        .weight-calculator {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+        }
+        .tip-box {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box {
+            background: linear-gradient(135deg, #fef2f2, #fecaca);
+            border-left: 4px solid #ef4444;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .collapse-btn {
+            background: none;
+            border: none;
+            color: #0369a1;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .collapse-btn:hover {
+            color: #0284c7;
+        }
+        .collapsible-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+    </style>
 </head>
 <body class="bg-amber-50 text-gray-800">
     <header class="site-header">
@@ -14,120 +142,724 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="index.html" class="text-xl font-bold text-sky-800">MSC Seascape</a>
+                        <a href="index.html" class="text-xl font-bold">🚢 MSC Seascape</a>
                     </div>
                     <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
-                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Overview</a>
-                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Prep List</a>
-                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Daily Plan</a>
-                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Weather</a>
-                        <a href="wardrobe.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Wardrobe</a>
-                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 active">Packing</a>
-                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Food</a>
-                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Pro Tips</a>
+                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Overview</a>
+                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Prep List</a>
+                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Daily Plan</a>
+                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Weather</a>
+                        <a href="wardrobe.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Wardrobe</a>
+                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium active">Packing</a>
+                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Food</a>
+                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Pro Tips</a>
                     </div>
                 </div>
                 <div class="flex items-center lg:hidden">
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-expanded="false">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
             </div>
         </nav>
-        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+        <div id="mobile-menu" class="lg:hidden hidden bg-sky-800/90 border-t border-sky-600">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Overview</a>
-                <a href="prep.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Prep List</a>
-                <a href="dailyplan.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Daily Plan</a>
-                <a href="weather.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Weather</a>
-                <a href="wardrobe.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Wardrobe</a>
-                <a href="packing.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600 active">Packing</a>
-                <a href="food.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Food</a>
-                <a href="protips.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Pro Tips</a>
+                <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Overview</a>
+                <a href="prep.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Prep List</a>
+                <a href="dailyplan.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Daily Plan</a>
+                <a href="weather.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Weather</a>
+                <a href="wardrobe.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Wardrobe</a>
+                <a href="packing.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium active">Packing</a>
+                <a href="food.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Food</a>
+                <a href="protips.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Pro Tips</a>
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <h1 class="section-title">🧳 Master Packer: Light & Smart Suitcase</h1>
-        <p class="mb-4 text-lg">Strategies and a checklist for efficient packing.</p>
+        <h1 class="section-title">🧳 Master Packer: Complete Cruise Guide</h1>
+        <p class="text-center text-lg mb-8 text-gray-600">Your comprehensive packing companion with smart strategies, interactive checklists, and expert tips.</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="card">
-                <h2 class="subsection-title">Key Strategies 🧠</h2>
-                <ul class="list-disc list-inside space-y-2">
-                    <li>Pack in layers - heavy items at bottom</li>
-                    <li>Use packing cubes for organization</li>
-                    <li>Roll clothes to save space</li>
-                    <li>Pack outfits, not individual pieces</li>
-                    <li>Leave space for souvenirs</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h2 class="subsection-title">Luggage Tips 🎒</h2>
-                <ul class="list-disc list-inside space-y-2">
-                    <li>Carry-on essentials:
-                        <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                            <li>• Swimwear (for first day)</li>
-                            <li>• Change of clothes</li>
-                            <li>• Important documents</li>
-                            <li>• Medications</li>
-                            <li>• Electronics & chargers</li>
-                        </ul>
-                    </li>
-                    <li>Print & attach luggage tags</li>
-                    <li>Use bright identifier on bags</li>
-                </ul>
-            </div>
-        </div>
-
+        <!-- Progress Tracking -->
         <div class="card mb-6">
-            <h2 class="subsection-title">Essential Packing Checklist ✅</h2>
-            <p class="mb-3">Interactive checklist - click items to mark as packed:</p>
-            <div id="packingChecklist" class="card p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1"></div>
+            <h2 class="subsection-title">📊 Packing Progress</h2>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-700">Overall Progress</span>
+                <span id="progress-text" class="text-sm font-medium text-gray-700">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-center">
+                <div class="p-3 bg-blue-50 rounded-lg">
+                    <div id="documents-count" class="text-2xl font-bold text-blue-600">0</div>
+                    <div class="text-sm text-gray-600">Documents</div>
+                </div>
+                <div class="p-3 bg-green-50 rounded-lg">
+                    <div id="clothing-count" class="text-2xl font-bold text-green-600">0</div>
+                    <div class="text-sm text-gray-600">Clothing</div>
+                </div>
+                <div class="p-3 bg-purple-50 rounded-lg">
+                    <div id="electronics-count" class="text-2xl font-bold text-purple-600">0</div>
+                    <div class="text-sm text-gray-600">Electronics</div>
+                </div>
+                <div class="p-3 bg-orange-50 rounded-lg">
+                    <div id="misc-count" class="text-2xl font-bold text-orange-600">0</div>
+                    <div class="text-sm text-gray-600">Miscellaneous</div>
+                </div>
+            </div>
         </div>
 
+        <!-- Weight Calculator -->
+        <div class="card weight-calculator mb-6">
+            <h2 class="subsection-title text-amber-800">⚖️ Luggage Weight Calculator</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-amber-800 mb-2">Checked Bag Weight (lbs)</label>
+                    <input type="number" id="checked-weight" class="w-full p-2 border border-amber-300 rounded-md" placeholder="0" max="50">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-amber-800 mb-2">Carry-on Weight (lbs)</label>
+                    <input type="number" id="carryon-weight" class="w-full p-2 border border-amber-300 rounded-md" placeholder="0" max="22">
+                </div>
+                <div class="flex items-end">
+                    <div class="w-full p-3 bg-white rounded-md border border-amber-300">
+                        <div class="text-sm text-amber-800">Total Weight</div>
+                        <div id="total-weight" class="text-2xl font-bold text-amber-900">0 lbs</div>
+                        <div id="weight-status" class="text-xs mt-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Master Packing Strategies -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="card">
+                <h2 class="subsection-title">🧠 Smart Packing Strategies</h2>
+                <div class="space-y-4">
+                    <div class="tip-box">
+                        <h3 class="font-semibold text-blue-700 mb-2">🎯 The "One Week Rule"</h3>
+                        <p class="text-sm">Pack for one week max, regardless of cruise length. Do laundry onboard or use ship services.</p>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span><strong>Roll, don't fold:</strong> Saves 30% more space and prevents wrinkles</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span><strong>Packing cubes:</strong> Organize by category and compress clothes</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span><strong>Heavy items bottom:</strong> Shoes and toiletries at suitcase bottom</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span><strong>Outfit planning:</strong> Pack complete outfits, not individual pieces</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span><strong>Empty space strategy:</strong> Leave 25% space for souvenirs</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="subsection-title">🎒 Carry-on Essentials Strategy</h2>
+                <div class="warning-box mb-4">
+                    <h3 class="font-semibold text-red-700 mb-2">⚠️ Critical Rule</h3>
+                    <p class="text-sm">Your carry-on should sustain you for 24-48 hours if checked luggage is delayed!</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="p-3 bg-red-50 rounded-lg">
+                        <h4 class="font-semibold text-red-700 text-sm">🚨 Must-Have (Survival Kit)</h4>
+                        <ul class="text-xs mt-1 space-y-1">
+                            <li>• Swimwear & cover-up (for day 1)</li>
+                            <li>• 1-2 complete outfit changes</li>
+                            <li>• All medications & prescriptions</li>
+                            <li>• Travel documents & copies</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 bg-blue-50 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 text-sm">💡 Smart Additions</h4>
+                        <ul class="text-xs mt-1 space-y-1">
+                            <li>• Electronics & chargers</li>
+                            <li>• Basic toiletries (3-1-1 compliant)</li>
+                            <li>• Underwear & socks for 2 days</li>
+                            <li>• Light jacket or sweater</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Master Checklist -->
+        <div class="card mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="subsection-title mb-0">✅ Master Packing Checklist</h2>
+                <div class="flex gap-2">
+                    <button id="check-all" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-sm">Check All</button>
+                    <button id="uncheck-all" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors text-sm">Reset</button>
+                </div>
+            </div>
+            <div id="packingChecklist" class="space-y-4"></div>
+        </div>
+
+        <!-- Cruise-Specific Packing -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="card">
+                <h2 class="subsection-title">🚢 MSC Seascape Specifics</h2>
+                <div class="space-y-4">
+                    <div class="tip-box">
+                        <h3 class="font-semibold text-blue-700 mb-2">🎭 Dress Codes by Venue</h3>
+                        <ul class="text-sm space-y-1">
+                            <li><strong>Formal Nights (2-3):</strong> Suit/cocktail dress minimum</li>
+                            <li><strong>Specialty Restaurants:</strong> Smart casual (no shorts/flip-flops)</li>
+                            <li><strong>Main Dining:</strong> Resort casual after 6pm</li>
+                            <li><strong>Deck/Pool:</strong> Swimwear + cover-up required</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 bg-green-50 rounded-lg">
+                        <h4 class="font-semibold text-green-700 text-sm mb-2">✅ Ship Provides</h4>
+                        <ul class="text-xs space-y-1">
+                            <li>• Hair dryer in cabin</li>
+                            <li>• Pool/beach towels</li>
+                            <li>• Basic soap & shampoo</li>
+                            <li>• Life jackets</li>
+                            <li>• Hangers (limited)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="subsection-title">🌊 Port-Specific Considerations</h2>
+                <div class="space-y-4">
+                    <div class="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <h4 class="font-semibold text-yellow-700 text-sm mb-2">🏝️ Caribbean Essentials</h4>
+                        <ul class="text-xs space-y-1">
+                            <li>• Reef-safe sunscreen (required in some ports)</li>
+                            <li>• Water shoes for rocky beaches</li>
+                            <li>• Dry bag for beach/snorkel excursions</li>
+                            <li>• Cash for local vendors</li>
+                            <li>• Insect repellent for jungle excursions</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 bg-purple-50 rounded-lg border border-purple-200">
+                        <h4 class="font-semibold text-purple-700 text-sm mb-2">🎒 Day Trip Essentials</h4>
+                        <ul class="text-xs space-y-1">
+                            <li>• Small backpack or day bag</li>
+                            <li>• Portable phone charger/power bank</li>
+                            <li>• Waterproof phone case</li>
+                            <li>• Comfortable walking shoes</li>
+                            <li>• Light layers for air conditioning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- What NOT to Pack -->
+        <div class="card mb-6">
+            <h2 class="subsection-title">🚫 What NOT to Pack</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="warning-box">
+                    <h3 class="font-semibold text-red-700 mb-2">⛔ Prohibited Items</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Weapons/knives of any kind</li>
+                        <li>• Illegal drugs/substances</li>
+                        <li>• Flammable liquids</li>
+                        <li>• Extension cords with outlets</li>
+                        <li>• Alcoholic beverages (check policy)</li>
+                        <li>• Drones</li>
+                        <li>• Candles/incense</li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold text-gray-700 mb-2">💡 Ship Provides</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Hair dryer</li>
+                        <li>• Beach/pool towels</li>
+                        <li>• Basic toiletries</li>
+                        <li>• Iron/ironing board (steward)</li>
+                        <li>• Laundry service available</li>
+                        <li>• Blankets & pillows</li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-semibold text-blue-700 mb-2">💰 Buy Onboard/Port</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Souvenirs & gifts</li>
+                        <li>• Additional sunscreen</li>
+                        <li>• Forgotten toiletries</li>
+                        <li>• Beach accessories</li>
+                        <li>• Formal wear (if needed)</li>
+                        <li>• Snorkel gear rentals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last-Minute Checklist -->
         <div class="card">
-            <h2 class="subsection-title">Last-Minute Reminders 🔔</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="p-4 bg-sky-50 rounded-lg">
-                    <h3 class="font-semibold text-sky-700">Don't Forget!</h3>
-                    <ul class="list-disc list-inside text-sm">
-                        <li>Passport & documents</li>
-                        <li>Medications</li>
-                        <li>Phone & charger</li>
-                        <li>Cash & cards</li>
+            <h2 class="subsection-title">🔔 24-Hour Pre-Departure Checklist</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                    <h3 class="font-semibold text-red-700 mb-2">🚨 Critical Tasks</h3>
+                    <ul class="text-sm space-y-1">
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check"> 
+                            <span>Passport/ID check</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Print boarding passes</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Check weather forecast</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Confirm flight times</span>
+                        </li>
                     </ul>
                 </div>
-                <div class="p-4 bg-sky-50 rounded-lg">
-                    <h3 class="font-semibold text-sky-700">Pre-Pack Tasks</h3>
-                    <ul class="list-disc list-inside text-sm">
-                        <li>Check weather forecast</li>
-                        <li>Charge all devices</li>
-                        <li>Print documents</li>
-                        <li>Set bag weight limits</li>
+                <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                    <h3 class="font-semibold text-blue-700 mb-2">📱 Tech Prep</h3>
+                    <ul class="text-sm space-y-1">
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Charge all devices</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Download offline maps</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Update travel apps</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Backup photos/data</span>
+                        </li>
                     </ul>
                 </div>
-                <div class="p-4 bg-sky-50 rounded-lg">
-                    <h3 class="font-semibold text-sky-700">Don't Pack</h3>
-                    <ul class="list-disc list-inside text-sm">
-                        <li>Hair dryer (provided)</li>
-                        <li>Beach towels (provided)</li>
-                        <li>Prohibited items</li>
-                        <li>Valuables</li>
+                <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
+                    <h3 class="font-semibold text-green-700 mb-2">🏠 Home Prep</h3>
+                    <ul class="text-sm space-y-1">
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Stop mail/packages</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Set thermostat</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Arrange pet care</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Empty fridge perishables</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                    <h3 class="font-semibold text-purple-700 mb-2">💼 Final Pack</h3>
+                    <ul class="text-sm space-y-1">
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Weigh luggage</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Pack carry-on essentials</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Double-check medications</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" class="last-minute-check">
+                            <span>Secure valuables</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="text-center py-8 text-sm text-gray-500">
-        <p>Happy Cruising on the MSC Seascape! ✨</p>
+    <footer class="text-center py-8 text-sm text-gray-500 bg-white border-t border-gray-200">
+        <p>⚓ Smooth sailing ahead on the MSC Seascape! Safe travels! ✨</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script>
+        // Comprehensive packing checklist data
+        const packingData = {
+            "📋 Essential Documents": [
+                "Passport (valid 6+ months)",
+                "Driver's license/ID",
+                "Cruise tickets/boarding passes",
+                "Travel insurance documents",
+                "Credit cards (2-3 different)",
+                "Cash (small bills for tips)",
+                "Emergency contact list",
+                "Copies of all documents (separate bag)",
+                "Health insurance cards",
+                "Vaccination records (if required)"
+            ],
+            "👔 Formal & Dining Attire": [
+                "Formal outfit for formal nights (2-3)",
+                "Cocktail dress or suit",
+                "Dress shoes (2 pairs)",
+                "Accessories (jewelry, tie, pocket square)",
+                "Smart casual outfits for specialty dining",
+                "Dress pants/khakis (3 pairs)",
+                "Collared shirts/blouses (4-5)",
+                "Sweater or blazer for air conditioning",
+                "Belt (matches shoes)",
+                "Dressy sandals"
+            ],
+            "🏖️ Beach & Pool Essentials": [
+                "Swimsuits (3-4 - rotate drying)",
+                "Beach cover-ups (2-3)",
+                "Flip-flops/beach sandals",
+                "Water shoes (rocky beaches)",
+                "Sunglasses (with strap)",
+                "Beach hat with chin strap",
+                "Reef-safe sunscreen (SPF 30+)",
+                "After-sun lotion/aloe vera",
+                "Dry bag for valuables",
+                "Beach read/e-reader"
+            ],
+            "👕 Casual Daywear": [
+                "T-shirts/tank tops (7-10)",
+                "Shorts (5-6 pairs)",
+                "Comfortable walking shoes",
+                "Sneakers for excursions",
+                "Casual dresses (3-4)",
+                "Capri pants/leggings (2-3)",
+                "Light cardigan for AC",
+                "Pajamas/sleepwear (3 sets)",
+                "Robe or cover-up",
+                "Comfortable socks (7-10 pairs)"
+            ],
+            "🩲 Undergarments & Intimates": [
+                "Underwear (10-12 pairs)",
+                "Bras (4-5, including sports bra)",
+                "Socks (athletic & dress)",
+                "Sleepwear/pajamas",
+                "Robe for cabin",
+                "Slippers for cabin",
+                "Shapewear (if desired)"
+            ],
+            "🧴 Toiletries & Personal Care": [
+                "Toothbrush & toothpaste",
+                "Shampoo & conditioner (travel size)",
+                "Body wash/soap",
+                "Deodorant",
+                "Razor & shaving cream",
+                "Moisturizer (face & body)",
+                "Prescription medications (extra supply)",
+                "Vitamins/supplements",
+                "First aid kit basics",
+                "Motion sickness remedies",
+                "Contact lenses & solution",
+                "Glasses & backup pair",
+                "Nail clippers & file",
+                "Tweezers",
+                "Cotton swabs/pads"
+            ],
+            "💄 Beauty & Grooming": [
+                "Makeup essentials",
+                "Makeup remover",
+                "Hair styling products",
+                "Hair brush/comb",
+                "Hair ties & clips",
+                "Perfume/cologne (travel size)",
+                "Lip balm with SPF",
+                "Face wash",
+                "Toner/serums",
+                "Nail polish & remover"
+            ],
+            "📱 Electronics & Tech": [
+                "Phone & charger",
+                "Portable power bank",
+                "Camera & extra batteries",
+                "E-reader/tablet & charger",
+                "Headphones/earbuds",
+                "Travel adapter (international ports)",
+                "Extension cord (no outlets)",
+                "Waterproof phone case",
+                "Bluetooth speaker (small)",
+                "Laptop (if needed) & charger"
+            ],
+            "💊 Health & Medications": [
+                "All prescription medications (extra supply)",
+                "Motion sickness patches/pills",
+                "Pain relievers (ibuprofen, acetaminophen)",
+                "Antacid/stomach relief",
+                "Anti-diarrheal medication",
+                "Bandages & antiseptic",
+                "Thermometer",
+                "Allergy medications",
+                "Probiotics for digestion",
+                "Electrolyte packets"
+            ],
+            "🎒 Day Trip & Excursion Gear": [
+                "Small backpack/day bag",
+                "Comfortable walking shoes",
+                "Water bottle (refillable)",
+                "Snorkeling gear (optional)",
+                "Underwater camera",
+                "Cash for local purchases",
+                "Insect repellent",
+                "Portable fan (battery)",
+                "Wet wipes",
+                "Plastic bags for wet items"
+            ],
+            "🧳 Packing Accessories": [
+                "Packing cubes (various sizes)",
+                "Laundry bag",
+                "Shoe bags",
+                "Garment bag for formal wear",
+                "Travel-sized laundry detergent",
+                "Wrinkle release spray",
+                "Extra hangers (a few)",
+                "Luggage locks",
+                "Luggage tags with contact info",
+                "Bright luggage identifier"
+            ],
+            "🎁 Miscellaneous & Comfort": [
+                "Travel pillow",
+                "Light blanket for flights",
+                "Snacks for travel day",
+                "Entertainment (books, games)",
+                "Travel journal & pen",
+                "Reusable shopping bag",
+                "Zip-lock bags (various sizes)",
+                "Duct tape (small roll)",
+                "Safety pins",
+                "Stain removal pen",
+                "Travel alarm clock",
+                "Earplugs & eye mask"
+            ]
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            renderPackingChecklist();
+            initializeEventListeners();
+            updateProgress();
+            setupWeightCalculator();
+            setupMobileMenu();
+        }
+
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        }
+
+        // Render the interactive packing checklist
+        function renderPackingChecklist() {
+            const container = document.getElementById('packingChecklist');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            Object.entries(packingData).forEach(([category, items]) => {
+                // Create category header
+                const categoryHeader = document.createElement('div');
+                categoryHeader.className = 'category-header';
+                categoryHeader.innerHTML = `
+                    <button class="collapse-btn w-full text-left flex justify-between items-center">
+                        <span>${category}</span>
+                        <span class="collapse-icon">▼</span>
+                    </button>
+                `;
+                container.appendChild(categoryHeader);
+
+                // Create collapsible content
+                const categoryContent = document.createElement('div');
+                categoryContent.className = 'collapsible-content';
+                
+                const itemsGrid = document.createElement('div');
+                itemsGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-4';
+
+                items.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'checklist-item';
+                    itemElement.innerHTML = `
+                        <input type="checkbox" id="${category}-${index}" class="packing-checkbox" data-category="${category}">
+                        <label for="${category}-${index}" class="flex-1 cursor-pointer text-sm">${item}</label>
+                    `;
+                    itemsGrid.appendChild(itemElement);
+                });
+
+                categoryContent.appendChild(itemsGrid);
+                container.appendChild(categoryContent);
+
+                // Add collapse functionality
+                const collapseBtn = categoryHeader.querySelector('.collapse-btn');
+                const collapseIcon = categoryHeader.querySelector('.collapse-icon');
+                
+                collapseBtn.addEventListener('click', function() {
+                    const isCollapsed = categoryContent.classList.contains('collapsed');
+                    categoryContent.classList.toggle('collapsed');
+                    collapseIcon.textContent = isCollapsed ? '▼' : '▲';
+                });
+            });
+        }
+
+        // Initialize event listeners
+        function initializeEventListeners() {
+            // Checklist item functionality
+            document.addEventListener('change', function(e) {
+                if (e.target.classList.contains('packing-checkbox')) {
+                    const item = e.target.closest('.checklist-item');
+                    item.classList.toggle('checked', e.target.checked);
+                    updateProgress();
+                }
+
+                if (e.target.classList.contains('last-minute-check')) {
+                    const item = e.target.closest('li');
+                    if (item) {
+                        item.style.opacity = e.target.checked ? '0.6' : '1';
+                        item.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+                    }
+                }
+            });
+
+            // Check all / Uncheck all buttons
+            const checkAllBtn = document.getElementById('check-all');
+            const uncheckAllBtn = document.getElementById('uncheck-all');
+
+            if (checkAllBtn) {
+                checkAllBtn.addEventListener('click', function() {
+                    const checkboxes = document.querySelectorAll('.packing-checkbox');
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = true;
+                        const item = checkbox.closest('.checklist-item');
+                        item.classList.add('checked');
+                    });
+                    updateProgress();
+                });
+            }
+
+            if (uncheckAllBtn) {
+                uncheckAllBtn.addEventListener('click', function() {
+                    const checkboxes = document.querySelectorAll('.packing-checkbox');
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = false;
+                        const item = checkbox.closest('.checklist-item');
+                        item.classList.remove('checked');
+                    });
+                    updateProgress();
+                });
+            }
+        }
+
+        // Update progress tracking
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.packing-checkbox');
+            const checkedBoxes = document.querySelectorAll('.packing-checkbox:checked');
+            const totalItems = checkboxes.length;
+            const checkedItems = checkedBoxes.length;
+            const percentage = totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
+
+            // Update overall progress
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            
+            if (progressFill) progressFill.style.width = `${percentage}%`;
+            if (progressText) progressText.textContent = `${percentage}%`;
+
+            // Update category counts
+            updateCategoryCounts();
+        }
+
+        function updateCategoryCounts() {
+            const categories = {
+                'documents': ['📋 Essential Documents'],
+                'clothing': ['👔 Formal & Dining Attire', '🏖️ Beach & Pool Essentials', '👕 Casual Daywear', '🩲 Undergarments & Intimates'],
+                'electronics': ['📱 Electronics & Tech'],
+                'misc': ['🧴 Toiletries & Personal Care', '💄 Beauty & Grooming', '💊 Health & Medications', '🎒 Day Trip & Excursion Gear', '🧳 Packing Accessories', '🎁 Miscellaneous & Comfort']
+            };
+
+            Object.entries(categories).forEach(([key, categoryNames]) => {
+                const countElement = document.getElementById(`${key}-count`);
+                if (countElement) {
+                    let checkedCount = 0;
+                    categoryNames.forEach(categoryName => {
+                        const categoryCheckboxes = document.querySelectorAll(`[data-category="${categoryName}"]:checked`);
+                        checkedCount += categoryCheckboxes.length;
+                    });
+                    countElement.textContent = checkedCount;
+                }
+            });
+        }
+
+        // Weight calculator functionality
+        function setupWeightCalculator() {
+            const checkedWeightInput = document.getElementById('checked-weight');
+            const carryonWeightInput = document.getElementById('carryon-weight');
+            const totalWeightDisplay = document.getElementById('total-weight');
+            const weightStatusDisplay = document.getElementById('weight-status');
+
+            function updateWeight() {
+                const checkedWeight = parseFloat(checkedWeightInput.value) || 0;
+                const carryonWeight = parseFloat(carryonWeightInput.value) || 0;
+                const totalWeight = checkedWeight + carryonWeight;
+
+                totalWeightDisplay.textContent = `${totalWeight} lbs`;
+
+                let status = '';
+                let statusClass = '';
+
+                if (checkedWeight > 50) {
+                    status = '⚠️ Checked bag over 50lb limit!';
+                    statusClass = 'text-red-600 font-semibold';
+                } else if (carryonWeight > 22) {
+                    status = '⚠️ Carry-on over 22lb limit!';
+                    statusClass = 'text-red-600 font-semibold';
+                } else if (totalWeight > 60) {
+                    status = '⚠️ Consider redistributing weight';
+                    statusClass = 'text-yellow-600 font-semibold';
+                } else if (totalWeight > 0) {
+                    status = '✅ Within weight limits';
+                    statusClass = 'text-green-600 font-semibold';
+                }
+
+                weightStatusDisplay.textContent = status;
+                weightStatusDisplay.className = `text-xs mt-1 ${statusClass}`;
+            }
+
+            if (checkedWeightInput && carryonWeightInput) {
+                checkedWeightInput.addEventListener('input', updateWeight);
+                carryonWeightInput.addEventListener('input', updateWeight);
+            }
+        }
+    </script>
 </body>
 </html>
