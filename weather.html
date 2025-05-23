@@ -290,17 +290,43 @@
 
         // Load weather data from OpenWeatherMap API
         async function loadWeatherData() {
-            const apiKey = 'demo'; // Using demo mode for this example
+           const apiKey = '93b345772a83e6422ff388516fa6fb57'; // Your OpenWeatherMap API key
             const loadingHTML = '<div class="loading-spinner mx-auto"></div>';
             
             // Show loading state
             document.getElementById('weatherCards').innerHTML = '<div class="col-span-full text-center py-8">' + loadingHTML + '<p class="mt-2 text-gray-600">Loading weather data...</p></div>';
 
             try {
-                // In a real implementation, you would use actual API calls
-                // For demo purposes, we'll simulate weather data
-                await simulateWeatherData();
+                // Fetch weather data for all ports
+                weatherData = {};
+                for (const port of cruisePorts) {
+                    try {
+                        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${port.lat}&lon=${port.lng}&appid=${apiKey}&units=metric`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        
+                        // Format the data to match our structure
+                        weatherData[port.name] = {
+                            temp: data.main.temp,
+                            feels_like: data.main.feels_like,
+                            humidity: data.main.humidity,
+                            description: data.weather[0].description,
+                            icon: data.weather[0].icon,
+                            wind_speed: data.wind.speed
+                        };
+                    } catch (portError) {
+                        console.error(`Error fetching weather for ${port.name}:`, portError);
+                        // Skip this port and continue with others
+                        continue;
+                    }
+                }
                 
+                if (Object.keys(weatherData).length === 0) {
+                    throw new Error('No weather data could be fetched');
+                }
+
                 renderWeatherCards();
                 updateChart();
                 updatePopups();
@@ -310,18 +336,10 @@
             }
         }
 
-        // Simulate weather data (replace with actual API calls)
+        // This function is no longer needed as we're using real API data
         async function simulateWeatherData() {
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            weatherData = {
-                "Miami": { temp: 29, feels_like: 33, humidity: 72, description: "Partly cloudy", icon: "02d", wind_speed: 12 },
-                "Ocean Cay": { temp: 28, feels_like: 32, humidity: 76, description: "Sunny", icon: "01d", wind_speed: 15 },
-                "Nassau": { temp: 30, feels_like: 34, humidity: 78, description: "Scattered showers", icon: "10d", wind_speed: 18 },
-                "Falmouth": { temp: 27, feels_like: 31, humidity: 80, description: "Thunderstorms", icon: "11d", wind_speed: 8 },
-                "George Town": { temp: 29, feels_like: 33, humidity: 74, description: "Clear sky", icon: "01d", wind_speed: 20 }
-            };
+            console.warn('Using real API data instead of simulation');
+            return null;
         }
 
         // Convert temperature between Celsius and Fahrenheit
