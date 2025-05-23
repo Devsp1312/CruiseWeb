@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MSC Seascape Caribbean Cruise Planner - June 2025">
+    <title>MSC Seascape Cruise Planner 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body class="bg-amber-50 text-gray-800">
+    <header class="site-header">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-xl font-bold text-sky-800">MSC Seascape</a>
+                    </div>
+                    <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
+                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 active">Overview</a>
+                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Prep List</a>
+                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Daily Plan</a>
+                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Weather</a>
+                        <a href="wardrobe.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Wardrobe</a>
+                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Packing</a>
+                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Food</a>
+                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Pro Tips</a>
+                    </div>
+                </div>
+                <div class="flex items-center lg:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600 active">Overview</a>
+                <a href="prep.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Prep List</a>
+                <a href="dailyplan.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Daily Plan</a>
+                <a href="weather.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Weather</a>
+                <a href="wardrobe.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Wardrobe</a>
+                <a href="packing.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Packing</a>
+                <a href="food.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Food</a>
+                <a href="protips.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Pro Tips</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <section>
+            <h1 class="section-title">🚢 MSC Seascape Caribbean Adventure</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="card">
+                    <h2 class="subsection-title">🛳️ Cruise Details</h2>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Ship:</strong> MSC Seascape</li>
+                        <li><strong>Dates:</strong> June 1-8, 2025 (7 nights)</li>
+                        <li><strong>Departure:</strong> Miami, FL (PortMiami)</li>
+                        <li><strong>Itinerary:</strong> Western Caribbean</li>
+                        <li><strong>Dining Time:</strong> 7:45 PM - 9:45 PM</li>
+                        <li><strong>Ports:</strong> Ocean Cay MSC Marine Reserve, Nassau (Bahamas), Falmouth (Jamaica), George Town (Cayman Islands)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2 class="subsection-title">👥 Group Details & Documents</h2>
+                    <div id="crewDocuments" class="space-y-2"></div>
+                </div>
+            </div>
+            <div class="card mb-6">
+                <h2 class="subsection-title">📝 Pre-Cruise Todo List</h2>
+                <p class="mb-4 text-sm">Click items to mark as completed:</p>
+                <div id="todoListContainer" class="space-y-1"></div>
+            </div>
+            <div class="card">
+                <h2 class="subsection-title">🗺️ Quick Links & Resources</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://www.msccruises.com/en-gl/Plan-Book/Manage-Booking.aspx" target="_blank" class="block p-4 bg-sky-50 rounded-lg hover:bg-sky-100">
+                        <h3 class="font-semibold text-sky-800">📱 MSC Web Check-in</h3>
+                        <p class="text-sm text-gray-600">Complete by May 30</p>
+                    </a>
+                    <a href="https://www.msccruises.com/en-gl/Mobile-Apps.aspx" target="_blank" class="block p-4 bg-sky-50 rounded-lg hover:bg-sky-100">
+                        <h3 class="font-semibold text-sky-800">📲 MSC for Me App</h3>
+                        <p class="text-sm text-gray-600">Download by May 31</p>
+                    </a>
+                    <a href="https://www.msccruises.com/en-gl/Ships/MSC-Seascape.aspx" target="_blank" class="block p-4 bg-sky-50 rounded-lg hover:bg-sky-100">
+                        <h3 class="font-semibold text-sky-800">🚢 Ship Guide</h3>
+                        <p class="text-sm text-gray-600">MSC Seascape Info</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 text-sm text-gray-500">
+        <p>Happy Cruising on the MSC Seascape! ✨</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -3,297 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSC Seascape Cruise Planner</title>
+    <meta name="description" content="MSC Seascape Caribbean Cruise Planner - June 2025">
+    <title>MSC Seascape Cruise Planner 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Visualization & Content Choices:
-        - Itinerary, Flights, Hotel, Crew Docs: Text lists/cards -> Inform -> Simple list/cards -> None -> Clarity -> HTML.
-        - YouTube Prep, To-Do List: Clickable categorized lists -> Inform/Organize -> Accordion/Checklist -> Click to expand/check -> Usability -> HTML/JS.
-        - Weather: Bar Chart (Temps) -> Compare/Inform -> Chart.js Canvas -> Hover tooltips -> Visual data comparison -> Chart.js.
-        - Dress Codes, Theme Nights, Day-by-Day Outfits, Detailed Daily Plan: Accordion/Interactive Cards/Clickable list -> Inform/Organize -> Collapsible sections/Expanding items -> Click to show details -> Detailed planning -> HTML/JS.
-        - Packing Checklist: Interactive List -> Organize/Action -> HTML list with JS-toggled styles -> Click to "check" -> Practicality -> HTML/JS.
-        - Food & Drinks, Pro-Tips: Cards/Lists -> Inform/Organize -> Styled lists/cards -> None -> Readability/Quick Reference -> HTML.
-        CONFIRMING NO SVG/Mermaid. -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .nav-link {
-            @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-sky-100 hover:text-sky-700 transition-colors;
-        }
-        .nav-link.active {
-            @apply bg-sky-600 text-white hover:bg-sky-700;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
         .section-title {
-            @apply text-3xl font-bold text-sky-700 mb-6;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: rgb(7, 89, 133);
+            border-bottom: 2px solid rgb(186, 230, 253);
+            padding-bottom: 0.5rem;
         }
+        
         .subsection-title {
-            @apply text-2xl font-semibold text-sky-600 mb-4 mt-6;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: rgb(3, 105, 161);
         }
+        
         .card {
-            @apply bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-bottom: 1rem;
         }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .accordion-button {
-            @apply w-full text-left px-4 py-3 bg-sky-50 hover:bg-sky-100 rounded-lg text-sky-700 font-semibold focus:outline-none transition-colors flex justify-between items-center;
-        }
-        .accordion-content {
-            @apply px-4 pt-2 pb-4 text-gray-700 bg-white rounded-b-lg;
+
+        .expandable-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
-        .checklist-item {
-            @apply flex items-center p-2 hover:bg-amber-50 rounded cursor-pointer;
-        }
-        .checklist-item.checked span {
-            @apply line-through text-gray-400;
-        }
-        .checklist-item.checked .checkbox-icon::before {
-            content: '✓';
-            @apply text-sky-600;
-        }
-        .checkbox-icon {
-            @apply w-5 h-5 mr-3 border-2 border-sky-400 rounded flex items-center justify-center text-xs font-bold;
-        }
-        .chart-container {
-            position: relative;
+
+        .accordion-button, .day-planner-button, .detailed-day-button {
             width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px; 
-            max-height: 450px;
+            text-align: left;
+            padding: 0.75rem;
+            background-color: rgb(249, 250, 251);
+            border-radius: 0.5rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
+
+        .accordion-button:hover, .day-planner-button:hover, .detailed-day-button:hover {
+            background-color: rgb(243, 244, 246);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .checklist-item:hover {
+            background-color: rgb(249, 250, 251);
+        }
+
+        .checkbox-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid rgb(14, 165, 233);
+            border-radius: 0.25rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .checklist-item.checked .checkbox-icon {
+            background-color: rgb(14, 165, 233);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+        }
+
+        .checklist-item.checked span {
+            text-decoration: line-through;
+            color: rgb(107, 114, 128);
+        }
+
+        .theme-night-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .theme-night-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-night-card h3 {
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .food-card {
+            background-color: rgb(249, 250, 251);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-container {
+            height: 16rem;
+        }
+
         @media (min-width: 768px) {
             .chart-container {
-                height: 400px;
+                height: 20rem;
             }
         }
-        .theme-night-card, .food-card {
-            @apply bg-gradient-to-br from-sky-50 to-blue-50 p-5 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-all duration-300;
-        }
-        .theme-night-details, .food-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
-        }
-        .day-planner-item, .detailed-day-item {
-            @apply border border-gray-200 rounded-lg mb-3 overflow-hidden;
-        }
-        .day-planner-button, .detailed-day-button {
-            @apply w-full text-left p-4 bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold focus:outline-none transition-colors flex justify-between items-center;
-        }
-        .day-planner-content, .detailed-day-content {
-             max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
-            @apply p-4 bg-white;
-        }
+
         .crew-member-card {
-            @apply bg-sky-50 p-4 rounded-lg shadow;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
         }
-         .tooltip {
-            position: relative;
-            display: inline-block;
+
+        .todo-details {
+            font-size: 0.75rem;
+            color: rgb(75, 85, 99);
+            margin-top: 0.25rem;
+            padding-left: 1.75rem;
         }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 220px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -110px;
-            opacity: 0;
-            transition: opacity 0.3s;
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
         }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        /* Print Styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
         }
     </style>
 </head>
 <body class="bg-amber-50 text-gray-800">
-
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <span class="font-bold text-xl text-sky-700">🚢 MSC Seascape Planner</span>
-                </div>
-                <div class="hidden lg:block">
-                    <div class="ml-10 flex items-baseline space-x-1 xl:space-x-2">
-                        <a href="#" class="nav-link active" data-tab="overview">Overview</a>
-                        <a href="#" class="nav-link" data-tab="prep">Pre-Cruise Prep</a>
-                        <a href="#" class="nav-link" data-tab="dailyplan">Detailed Plan</a>
-                        <a href="#" class="nav-link" data-tab="weather">Weather</a>
-                        <a href="#" class="nav-link" data-tab="wardrobe">Wardrobe</a>
-                        <a href="#" class="nav-link" data-tab="packing">Packing Hub</a>
-                        <a href="#" class="nav-link" data-tab="food">Food & Drinks</a>
-                        <a href="#" class="nav-link" data-tab="protips">Pro-Tips</a>
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-sky-800">MSC Seascape</span>
+                    </div>
+                    <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
+                        <a href="#" data-tab="overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Overview</a>
+                        <a href="#" data-tab="prep" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Prep List</a>
+                        <a href="#" data-tab="dailyplan" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Daily Plan</a>
+                        <a href="#" data-tab="weather" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Weather</a>
+                        <a href="#" data-tab="wardrobe" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Wardrobe</a>
+                        <a href="#" data-tab="packing" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Packing</a>
+                        <a href="#" data-tab="food" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Food</a>
+                        <a href="#" data-tab="protips" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Pro Tips</a>
                     </div>
                 </div>
-                <div class="lg:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-sky-700 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                <div class="flex items-center lg:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
             </div>
         </nav>
         <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
-            <a href="#" class="block nav-link active" data-tab="overview">Overview</a>
-            <a href="#" class="block nav-link" data-tab="prep">Pre-Cruise Prep</a>
-            <a href="#" class="block nav-link" data-tab="dailyplan">Detailed Plan</a>
-            <a href="#" class="block nav-link" data-tab="weather">Weather</a>
-            <a href="#" class="block nav-link" data-tab="wardrobe">Wardrobe</a>
-            <a href="#" class="block nav-link" data-tab="packing">Packing Hub</a>
-            <a href="#" class="block nav-link" data-tab="food">Food & Drinks</a>
-            <a href="#" class="block nav-link" data-tab="protips">Pro-Tips</a>
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" data-tab="overview" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Overview</a>
+                <a href="#" data-tab="prep" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Prep List</a>
+                <a href="#" data-tab="dailyplan" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Daily Plan</a>
+                <a href="#" data-tab="weather" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Weather</a>
+                <a href="#" data-tab="wardrobe" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Wardrobe</a>
+                <a href="#" data-tab="packing" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Packing</a>
+                <a href="#" data-tab="food" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Food</a>
+                <a href="#" data-tab="protips" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Pro Tips</a>
+            </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-
         <section id="overview" class="tab-content active">
-            <h1 class="section-title">Your MSC Seascape Adventure!</h1>
-            <p class="mb-6 text-lg">Welcome to your updated interactive guide for an amazing 7-night Caribbean and Bahamas cruise aboard the MSC Seascape, from June 1 to June 8, 2025, plus pre and post-cruise plans! This planner is designed to help your group prepare for an unforgettable journey.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <h1 class="section-title">🚢 MSC Seascape Caribbean Adventure</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div class="card">
-                    <h2 class="subsection-title">Cruise Itinerary 🗓️</h2>
-                    <p class="mb-3"><strong>Ship:</strong> MSC Seascape<br><strong>Dates:</strong> June 1 - June 8, 2025<br><strong>Departure Port:</strong> Miami, FL (Port Address: 2200 N Cruise Blvd, Miami, FL 33132)</p>
-                    <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li><strong>Day 1 (Sat, June 1):</strong> Embark in Miami, Florida (Departs @ 5:00 PM)</li>
-                        <li><strong>Day 2 (Sun, June 2):</strong> Ocean Cay MSC Marine Reserve, Bahamas (8:00 AM - 8:00 PM)</li>
-                        <li><strong>Day 3 (Mon, June 3):</strong> Nassau, Bahamas (9:00 AM - 6:00 PM)</li>
-                        <li><strong>Day 4 (Tue, June 4):</strong> At Sea</li>
-                        <li><strong>Day 5 (Wed, June 5):</strong> Falmouth, Jamaica (9:00 AM - 6:00 PM)</li>
-                        <li><strong>Day 6 (Thu, June 6):</strong> George Town, Cayman Islands (Tender, 8:00 AM - 5:00 PM)</li>
-                        <li><strong>Day 7 (Fri, June 7):</strong> At Sea</li>
-                        <li><strong>Day 8 (Sat, June 8):</strong> Disembark in Miami, Florida (Arrives @ 7:00 AM)</li>
+                    <h2 class="subsection-title">🛳️ Cruise Details</h2>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Ship:</strong> MSC Seascape</li>
+                        <li><strong>Dates:</strong> June 1-8, 2025 (7 nights)</li>
+                        <li><strong>Departure:</strong> Miami, FL (PortMiami)</li>
+                        <li><strong>Itinerary:</strong> Western Caribbean</li>
+                        <li><strong>Dining Time:</strong> 7:45 PM - 9:45 PM</li>
+                        <li><strong>Ports:</strong> Ocean Cay MSC Marine Reserve, Nassau (Bahamas), Falmouth (Jamaica), George Town (Cayman Islands)</li>
                     </ul>
                 </div>
-
                 <div class="card">
-                    <h2 class="subsection-title">✈️ Flight Details</h2>
-                    <div class="space-y-3 text-sm">
-                        <div><strong>EWR → FLL:</strong> JetBlue #305, Sat, May 31. Departs 9:00 PM (EWR Terminal A), Arrives 12:13 AM (FLL). Conf: NSEWLZ.</div>
-                        <div><strong>FLL → EWR:</strong> JetBlue #706, Tue, Jun 10. Departs 8:00 PM (FLL Terminal 3), Arrives 11:04 PM (EWR). Conf: NSEWLZ.</div>
-                    </div>
-                    <h2 class="subsection-title mt-4">🏨 Pre-Cruise Hotel (May 31 - June 1)</h2>
-                    <p class="text-sm"><strong>Hyatt Place Fort Lauderdale Airport/Cruise Port</strong><br>91 Southwest 18th Avenue, Dania Beach, FL 33004.<br>Phone: +1 954 922 0436<br>Check-in: From 3:00 PM (Sat, May 31) | Check-out: Until 12:00 PM (Sun, June 1)<br>Confirmation: 4882.947.559 / PIN: 6790 (2 Queen Rooms, 8 guests total, Breakfast included). Price: $393.24 total.<br>Notes: Airport shuttle available (call property). Prepayment charged. Call hotel re: late arrival & check-in for Karan/Anant (minors).</p>
+                    <h2 class="subsection-title">👥 Group Details & Documents</h2>
+                    <div id="crewDocuments" class="space-y-2"></div>
                 </div>
             </div>
-
-            <div class="card mb-8">
-                <h2 class="subsection-title">👥 Your Crew & Documents</h2>
-                <p class="mb-3">Ensure everyone has their required documents ready!</p>
-                <div id="crewDocuments" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    </div>
-                <p class="mt-3 text-sm"><strong>Cabin Assignments (Known):</strong> Jay & Shiv - 13246 | Dev & Karan - 13261. (Tilak & Anant, Shrey & Jalpan - TBD)</p>
-                <p class="text-xs mt-2">Note: MSC Booking Login details are available in your source documents for managing individual bookings.</p>
+            <div class="card mb-6">
+                <h2 class="subsection-title">📝 Pre-Cruise Todo List</h2>
+                <p class="mb-4 text-sm">Click items to mark as completed:</p>
+                <div id="todoListContainer" class="space-y-1"></div>
             </div>
-
             <div class="card">
-                <h2 class="subsection-title">🚢 Ship Highlights & Onboard Activities</h2>
-                <p class="mb-3">MSC Seascape is packed with fun! Here are some things to look forward to (some may require booking or have extra costs):</p>
-                <ul class="list-disc list-inside space-y-1 text-gray-700 columns-1 sm:columns-2 lg:columns-3">
-                    <li>Robotron Ride ($12)</li>
-                    <li>Multiple Pools (Infinity, Marina) & Hot Tubs</li>
-                    <li>Water Park & Slides</li>
-                    <li>Ropes Course</li>
-                    <li>Sports Arena (Basketball, Pickleball)</li>
-                    <li>Fitness Center & Spa</li>
-                    <li>MSC Shows (Book via App)</li>
-                    <li>Table Tennis, Pool Table, Foosball, Board Games</li>
-                    <li>Movie Nights on Main Deck</li>
-                    <li>Karaoke & Comedy Shows (Adult-only option)</li>
-                    <li>Teenage Zone (for Anant)</li>
-                    <li>Casino, Arcade</li>
-                    <li>Shopping Outlets</li>
-                    <li>Fantastica Experience Perks (e.g., dining preference, free room service delivery)</li>
-                </ul>
+                <h2 class="subsection-title">🗺️ Quick Links & Resources</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://www.msccruises.com/en-gl/Plan-Book/Manage-Booking.aspx" target="_blank" class="block p-4 bg-sky-50 rounded-lg hover:bg-sky-100">
+                        <h3 class="font-semibold text-sky-800">📱 MSC Web Check-in</h3>
+                        <p class="text-sm text-gray-600">Complete by May 30</p>
+                    </a>
+                    <a href="https://www.msccruises.com/en-gl/Mobile-Apps.aspx" target="_blank" class="block p-4 bg-sky-50 rounded-lg hover:bg-sky-100">
+                        <h3 class="font-semibold text-sky-800">📲 MSC for Me App</h3>
+                        <p class="text-sm text-gray-600">Download by May 31</p>
+                    </a>
+                    <a href="https://www.msccruises.com/en-gl/Ships/MSC-Seascape.aspx" target="_blank" class="block p-4 bg-sky-50 rounded-lg hover:bg-sky-100">
+                        <h3 class="font-semibold text-sky-800">🚢 Ship Guide</h3>
+                        <p class="text-sm text-gray-600">MSC Seascape Info</p>
+                    </a>
+                </div>
             </div>
         </section>
 
         <section id="prep" class="tab-content">
-            <h1 class="section-title">📝 Pre-Cruise Preparations</h1>
-            <p class="mb-4 text-lg">Key tasks and research to do before you sail.</p>
-
-            <div class="card mb-6 accordion-item">
-                <button class="accordion-button"><span>✅ Expanded To-Do List</span><span class="accordion-icon transform transition-transform duration-300">▼</span></button>
-                <div class="accordion-content">
-                    <div id="todoListContainer" class="space-y-1 text-sm"></div>
+            <h1 class="section-title">🎯 Pre-Cruise Preparation Guide</h1>
+            <div class="card mb-6">
+                <h2 class="subsection-title">🏨 Hotel & Transportation</h2>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-sky-700 mb-2">May 31 - Arrival Night</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li><strong>Hotel:</strong> Hyatt Place Fort Lauderdale Airport/Cruise Port
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• Phone: +1 954 922 0436 (opt 4 for shuttle)</li>
+                                    <li>• Late check-in okay (arrival ~1 AM)</li>
+                                    <li>• Karan/Anant need special check-in arrangements</li>
+                                    <li>• Breakfast included</li>
+                                </ul>
+                            </li>
+                            <li><strong>Flight:</strong> JetBlue #305
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• EWR Terminal A → FLL</li>
+                                    <li>• Departure: 9:00 PM</li>
+                                    <li>• Arrival: 12:13 AM</li>
+                                    <li>• Confirmation: NSEWLZ</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-sky-700 mb-2">June 1 - Embarkation Day</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li>Hotel checkout by 12:00 PM</li>
+                            <li>Target/store run for snacks in morning</li>
+                            <li>Lunch nearby (e.g., Chipotle)</li>
+                            <li>Transport to cruise port:
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• Address: 2200 N Cruise Blvd, Miami, FL 33132</li>
+                                    <li>• Options: Hotel shuttle or Uber</li>
+                                    <li>• Arrive by 3:00 PM (all aboard 5:00 PM)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-6">
+                <h2 class="subsection-title">📱 Important Apps & Accounts</h2>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-sky-700 mb-2">MSC for Me App</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Download by May 31</li>
+                            <li>Features:
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• Daily schedules</li>
+                                    <li>• Restaurant bookings</li>
+                                    <li>• Show reservations</li>
+                                    <li>• Account balance</li>
+                                    <li>• Ship maps</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-sky-700 mb-2">Web Check-in</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Complete by May 30 for all accounts</li>
+                            <li>Print embarkation forms</li>
+                            <li>Print luggage tags</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-6">
+                <h2 class="subsection-title">📜 Document Checklist</h2>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <ul class="list-disc list-inside text-sm space-y-2">
+                            <li><strong>All Passengers:</strong>
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• Valid Passport</li>
+                                    <li>• MSC e-tickets</li>
+                                    <li>• Printed luggage tags</li>
+                                    <li>• Credit cards</li>
+                                </ul>
+                            </li>
+                            <li><strong>Anant:</strong>
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• Notarized parental consent form (with Tilak's name)</li>
+                                    <li>• Driver's License (if available)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Karan:</strong>
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• Notarized parental consent form (with Dev's name)</li>
+                                    <li>• Driver's License</li>
+                                </ul>
+                            </li>
+                            <li><strong>Shrey:</strong>
+                                <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li>• Green Card</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
             <h2 class="subsection-title">📺 YouTube Research Recommendations</h2>
             <p class="mb-4">Get familiar with the ship and gain tips from fellow cruisers. Search for these types of videos:</p>
-            <div class="space-y-4">
-                 <div class="card accordion-item">
-                    <button class="accordion-button"><span>Full Ship Tours & Overviews 🚢</span><span class="accordion-icon transform transition-transform duration-300">▼</span></button>
-                    <div class="accordion-content">
-                        <p><strong>Search for:</strong> "MSC Seascape Full Ship Tour", "MSC Seascape Review and Walkthrough"</p>
-                        <p><strong>Value:</strong> Virtual walkthrough of layout, key areas (atrium, pools, Robotron, Bridge of Sighs, water park, dining). Helps navigation.</p>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <div class="bg-white rounded-lg shadow p-4">
+                    <h3 class="font-semibold text-sky-700 mb-2">🚢 Ship Tours</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>MSC Seascape full ship tour</li>
+                        <li>Cabin tours and layouts</li>
+                        <li>Pool deck and water features</li>
+                        <li>Dining venues walkthrough</li>
+                    </ul>
                 </div>
-                <div class="card accordion-item">
-                    <button class="accordion-button"><span>Tips, Tricks & Hacks for MSC 💡</span><span class="accordion-icon transform transition-transform duration-300">▼</span></button>
-                    <div class="accordion-content">
-                        <p><strong>Search for:</strong> "MSC Seascape Tips and Tricks", "Things to Know Before MSC Cruise", "MSC Cruise Hacks"</p>
-                        <p><strong>Value:</strong> Learn about MSC for Me app, best times for amenities, dining, cabin hacks.</p>
-                    </div>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <h3 class="font-semibold text-sky-700 mb-2">🏖️ Port Guides</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>Ocean Cay tips and activities</li>
+                        <li>Nassau excursion reviews</li>
+                        <li>Falmouth port guide</li>
+                        <li>George Town tender process</li>
+                    </ul>
                 </div>
-                <div class="card accordion-item">
-                    <button class="accordion-button"><span>Ocean Cay MSC Marine Reserve Guides 🏝️</span><span class="accordion-icon transform transition-transform duration-300">▼</span></button>
-                    <div class="accordion-content">
-                        <p><strong>Search for:</strong> "Ocean Cay MSC Marine Reserve Tips", "Guide to Ocean Cay Beaches"</p>
-                        <p><strong>Value:</strong> Island layout, beaches, food/drink, activities (snorkeling, lighthouse show).</p>
-                    </div>
-                </div>
-                 <div class="card accordion-item">
-                    <button class="accordion-button"><span>Cabin Reviews 🛌</span><span class="accordion-icon transform transition-transform duration-300">▼</span></button>
-                    <div class="accordion-content">
-                        <p><strong>Search for:</strong> "MSC Seascape [Your Cabin Type] Tour"</p>
-                        <p><strong>Value:</strong> Cabin layout, storage, bathroom, outlets.</p>
-                    </div>
-                </div>
-                <div class="card accordion-item">
-                    <button class="accordion-button"><span>Specific Video Suggestions (from your notes) 🎬</span><span class="accordion-icon transform transition-transform duration-300">▼</span></button>
-                    <div class="accordion-content">
-                        <ul class="list-disc list-inside text-sm">
-                            <li><a href="https://www.youtube.com/watch?v=w1dIFbm2L9Y&ab_channel=Let%27sGoSeeIt" target="_blank" class="text-sky-600 hover:underline">Likely a general MSC Seascape video (link incomplete)</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=8JbsL4nrJSo&ab_channel=BoatBreakers" target="_blank" class="text-sky-600 hover:underline">2024 MSC Seascape Review || WATCH BEFORE BOOKING!</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=2hhiatVaXok&ab_channel=LifeWellCruised" target="_blank" class="text-sky-600 hover:underline">Our First MSC Cruise Was NOT What We Expected. Here's Why [MSC Seascape Review]</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=7yfUd3PaHDk&ab_channel=CruiseBlog" target="_blank" class="text-sky-600 hover:underline">20 MISTAKES to avoid on an MSC Cruise!</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=-7Bd-fAPvd8&ab_channel=Mr.Gizmo" target="_blank" class="text-sky-600 hover:underline">Addressing the Bad Reviews of the MSC Seascape Cruise | The Truth Revealed</a></li>
-                            <li><a href="https://www.youtube.com/watch?v=fzZ6_lUKeEo&ab_channel=GroundedLifeCruises" target="_blank" class="text-sky-600 hover:underline">MSC Seascape Food Review | Main Dining Room All Meals Shown</a></li>
-                        </ul>
-                    </div>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <h3 class="font-semibold text-sky-700 mb-2">💡 Tips & Tricks</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>First-time MSC cruiser tips</li>
+                        <li>Drink package reviews</li>
+                        <li>Embarkation day hacks</li>
+                        <li>Money-saving cruise tips</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -348,11 +455,11 @@
             <h2 class="subsection-title">MSC Seascape Theme Nights (2025) 🎉</h2>
             <p class="mb-4">Participation optional. Click for ideas:</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <div class="theme-night-card" data-theme="white"><h3 class="text-xl font-semibold text-sky-700 mb-2">⚪ White Night</h3><div class="theme-night-details"><p class="text-sm text-gray-600"><strong>Wear:</strong> All white! White polo/button-down, white chinos/jeans.</p></div></div>
-                <div class="theme-night-card" data-theme="sunshine"><h3 class="text-xl font-semibold text-sky-700 mb-2">☀️ Sunshine Party (Retro)</h3><div class="theme-night-details"><p class="text-sm text-gray-600"><strong>Wear:</strong> Bright colors, retro (60s-90s), floral. Vintage tees, patterned shirts.</p></div></div>
-                <div class="theme-night-card" data-theme="tropical"><h3 class="text-xl font-semibold text-sky-700 mb-2">🌴 Tropical Night</h3><div class="theme-night-details"><p class="text-sm text-gray-600"><strong>Wear:</strong> Island spirit! Hawaiian/floral shirts, linen, light chinos/shorts.</p></div></div>
-                <div class="theme-night-card" data-theme="glow"><h3 class="text-xl font-semibold text-sky-700 mb-2">✨ Glow Pop Hits Party</h3><div class="theme-night-details"><p class="text-sm text-gray-600"><strong>Wear:</strong> Neon, bright colors, blacklight reactive items.</p></div></div>
-                <div class="theme-night-card" data-theme="silent"><h3 class="text-xl font-semibold text-sky-700 mb-2">🎧 Silent Disco</h3><div class="theme-night-details"><p class="text-sm text-gray-600"><strong>Wear:</strong> Comfort for dancing! Often overlaps or general party wear.</p></div></div>
+                <div class="theme-night-card"><h3 data-expandable-trigger>⚪ White Night <span class="expand-icon transform transition-transform duration-300">▼</span></h3><div class="theme-night-details expandable-content"><p><strong>Wear:</strong> All white! White polo/button-down, white chinos/jeans.</p></div></div>
+                <div class="theme-night-card"><h3 data-expandable-trigger>☀️ Sunshine Party (Retro) <span class="expand-icon transform transition-transform duration-300">▼</span></h3><div class="theme-night-details expandable-content"><p><strong>Wear:</strong> Bright colors, retro (60s-90s), floral. Vintage tees, patterned shirts.</p></div></div>
+                <div class="theme-night-card"><h3 data-expandable-trigger>🌴 Tropical Night <span class="expand-icon transform transition-transform duration-300">▼</span></h3><div class="theme-night-details expandable-content"><p><strong>Wear:</strong> Island spirit! Hawaiian/floral shirts, linen, light chinos/shorts.</p></div></div>
+                <div class="theme-night-card"><h3 data-expandable-trigger>✨ Glow Pop Hits Party <span class="expand-icon transform transition-transform duration-300">▼</span></h3><div class="theme-night-details expandable-content"><p><strong>Wear:</strong> Neon, bright colors, blacklight reactive items.</p></div></div>
+                <div class="theme-night-card"><h3 data-expandable-trigger>🎧 Silent Disco <span class="expand-icon transform transition-transform duration-300">▼</span></h3><div class="theme-night-details expandable-content"><p><strong>Wear:</strong> Comfort for dancing! Often overlaps or general party wear.</p></div></div>
             </div>
             <h2 class="subsection-title">Day-by-Day Outfit Planner (Cruise Days) 🗓️👕</h2>
             <p class="mb-4">Outfit ideas integrating itinerary, weather, activities & dress codes. Click day for suggestions.</p>
@@ -384,31 +491,68 @@
                 <div class="card">
                     <h2 class="subsection-title">Dining Venues & Tips 🍽️</h2>
                     <ul class="list-disc list-inside space-y-2 text-sm">
-                        <li><strong>Marketplace Buffet:</strong> Main buffet, includes vegan section. Open 24/7 (verify hours for full service). Can be crowded at peak times; try going early/late. Pizza is good. Make-your-own sandwiches/bowls (Qdoba style). Fresh fruit.
-                            <span class="tooltip">💡<span class="tooltiptext">Avoid dinner buffet if possible, per user notes.</span></span>
+                        <li><strong>Main Dining Room (Assigned Time: 7:45 PM - 9:45 PM)</strong>
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Arrive on time - tables are held for only 15 minutes</li>
+                                <li>• Dress code enforced (no shorts/flip-flops in evening)</li>
+                                <li>• Tip server first two nights for better service ($10/night recommended)</li>
+                            </ul>
                         </li>
-                        <li><strong>Main Dining Rooms (4 total):</strong> Menu changes daily. Same waiter for all 7 days. QR code for drink orders (sometimes buggy). Late dining: 7:45 PM - 9:45 PM. Ask if you can dine together (link bookings). Indian food night (Aloo Gobi, Naan).</li>
-                        <li><strong>Hola! Tacos & Cantina:</strong> Specialty dining, try to make a reservation. (Menu photos in user notes)</li>
-                        <li><strong>Room Service:</strong> Free delivery with Fantastica Experience. $4 delivery for breakfast in room (worth it on early excursion days).</li>
-                        <li><strong>Ice Cream & Desserts:</strong> Free ice cream at lunch/dinner. Gelato costs extra. Chocolate bar available. Lots of desserts - try them all! Specific mentions: Caribbean Crumble (Day 6), Tiramisu, Melting Cream Cake (like cheesecake but better). Cheesecake available daily.</li>
-                        <li><strong>General Food Notes:</strong> Food can be hit-or-miss. Roasted Vegetable Lasagna, Pennette Pasta mentioned as good.</li>
+                        <li><strong>Marketplace Buffet</strong>
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Open for breakfast, lunch, and dinner</li>
+                                <li>• Good vegetarian options available</li>
+                                <li>• Best times: Early or late to avoid crowds</li>
+                                <li>• Sea Day Brunch (8 AM - 1 PM) highly recommended</li>
+                            </ul>
+                        </li>
+                        <li><strong>Specialty Restaurants (Extra Cost)</strong>
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• HOLA! Tacos & Cantina - Mexican</li>
+                                <li>• Butcher's Cut - Steakhouse</li>
+                                <li>• Ocean Cay - Seafood</li>
+                                <li>• Kaito Sushi Bar</li>
+                                <li>• Kaito Teppanyaki</li>
+                            </ul>
+                        </li>
+                        <li><strong>Ocean Cay MSC Marine Reserve</strong>
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Limited vegetarian options on island</li>
+                                <li>• Consider eating lunch on ship</li>
+                                <li>• Food trucks available but can be busy</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="card">
                     <h2 class="subsection-title">Drink Packages & Beverages 🥤</h2>
                     <p class="text-sm mb-2">Consider if a package is worth it for your group. Can be shared if booked under different cabins.</p>
                     <div class="food-card mb-3">
-                        <h3 class="text-lg font-semibold text-sky-700 mb-1 accordion-button items-center justify-between"><span>Alcohol-Free Package</span><span class="accordion-icon transform transition-transform duration-300">▼</span></h3>
-                        <div class="food-details text-sm">
-                            <p>Approx. $30/day ($210 for 7 days). Includes non-alcoholic cocktails, sodas, energy drinks, juices, bottled water, coffee drinks, hot chocolate, tea, soft-serve ice cream.</p>
-                        </div>
+                        <h3 class="font-semibold text-sky-700 mb-2">Premium Extra Package ($79/day)</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Premium cocktails, spirits, liquors</li>
+                            <li>All wines by the glass</li>
+                            <li>Draft & bottled beers</li>
+                            <li>Non-alcoholic cocktails</li>
+                            <li>Soft drinks & energy drinks</li>
+                            <li>Bottled water & specialty coffees</li>
+                            <li>Priority service at bars</li>
+                            <li><strong>Note:</strong> Must be purchased for entire cruise duration</li>
+                        </ul>
                     </div>
                     <div class="food-card">
-                        <h3 class="text-lg font-semibold text-sky-700 mb-1 accordion-button items-center justify-between"><span>Premium Extra Package (Offer up to 40% off)</span><span class="accordion-icon transform transition-transform duration-300">▼</span></h3>
-                        <div class="food-details text-sm">
-                            <p>Approx. $51/day ($357 for 7 days with discount). Includes all beverages up to $16. Extensive selection of frozen & classic cocktails, premium brand spirits, liqueurs, cordials, wines & champagne by the glass, draft & bottled beer, energy drinks, canned sodas, fruit juices, bottled mineral water, coffee drinks, hot chocolate, tea.</p>
-                            <p class="mt-1"><em>User note: If 2 people get it, can share (15 drinks/day/person = 30 total for 2). Approx. 4 drinks/person for the group.</em></p>
-                        </div>
+                        <h3 class="font-semibold text-sky-700 mb-2">Non-Alcoholic Package ($25/day)</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Unlimited sodas</li>
+                            <li>Fresh fruit juices</li>
+                            <li>Energy drinks</li>
+                            <li>Bottled water</li>
+                            <li>Coffee, tea, hot chocolate</li>
+                            <li>Ice cream servings</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                        <p class="text-sm text-yellow-800"><strong>Group Plan:</strong> Premium Extra package on Shiv & Jay's account for sharing. Others can use their cabin cards for package benefits.</p>
                     </div>
                 </div>
             </div>
@@ -417,8 +561,7 @@
         <section id="protips" class="tab-content">
             <h1 class="section-title">💡 Cruise Pro-Tips & Things to Know</h1>
             <p class="mb-4 text-lg">Consolidated tips from your notes and general advice for a smoother cruise.</p>
-            <div id="proTipsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                </div>
+            <div id="proTipsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </section>
     </main>
 
@@ -434,7 +577,9 @@
 
     function switchTab(tabId) {
         tabContents.forEach(content => content.classList.remove('active'));
-        document.getElementById(tabId)?.classList.add('active');
+        const activeTab = document.getElementById(tabId);
+        if (activeTab) activeTab.classList.add('active');
+        
         navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.dataset.tab === tabId) link.classList.add('active');
@@ -454,32 +599,39 @@
         });
     });
     
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        mobileMenu.classList.toggle('block');
-    });
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('block');
+        });
+    }
 
-    function setupAccordion(selector) {
-        const items = document.querySelectorAll(selector);
-        items.forEach(item => {
-            const button = item.querySelector('.accordion-button') || item.querySelector('.food-card > h3') || item.querySelector('.theme-night-card > h3');
-            const content = item.querySelector('.accordion-content') || item.querySelector('.food-details') || item.querySelector('.theme-night-details');
-            const icon = item.querySelector('.accordion-icon');
-            
+    function initializeExpandable() {
+        const expandableItems = document.querySelectorAll('.accordion-item, .theme-night-card, .food-card, .day-planner-item, .detailed-day-item');
+
+        expandableItems.forEach(item => {
+            const button = item.querySelector('.accordion-button, h3[data-expandable-trigger], .day-planner-button, .detailed-day-button');
+            const content = item.querySelector('.accordion-content, .theme-night-details, .food-details, .day-planner-content, .detailed-day-content');
+            const icon = button ? button.querySelector('.accordion-icon, .expand-icon') : null;
+
             if (button && content) {
                 button.addEventListener('click', () => {
                     const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
                     
-                    // Close others of the same type
-                    document.querySelectorAll(selector).forEach(otherItem => {
-                        if (otherItem !== item) {
-                            const otherContent = otherItem.querySelector('.accordion-content') || otherItem.querySelector('.food-details') || otherItem.querySelector('.theme-night-details');
-                            const otherIcon = otherItem.querySelector('.accordion-icon');
-                            if (otherContent) otherContent.style.maxHeight = null;
-                            if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
-                        }
-                    });
-
+                    // Simple toggle: if you want to close others, that logic needs to be specific to groups
+                    // For now, this will just toggle the clicked item.
+                    // To close others within the same parent container:
+                    if (item.parentElement && item.parentElement.contains(item)) { // Check if it's part of a group
+                        Array.from(item.parentElement.children).forEach(sibling => {
+                            if (sibling !== item && sibling.matches(item.tagName.toLowerCase() + (item.className.split(' ').map(c => c.trim() ? '.'+c : '').join('')) )) { // Ensure it's a similar item
+                                const siblingContent = sibling.querySelector('.accordion-content, .theme-night-details, .food-details, .day-planner-content, .detailed-day-content');
+                                const siblingIcon = sibling.querySelector('.accordion-icon, .expand-icon');
+                                if (siblingContent) siblingContent.style.maxHeight = null;
+                                if (siblingIcon) siblingIcon.style.transform = 'rotate(0deg)';
+                            }
+                        });
+                    }
+                    
                     if (isOpen) {
                         content.style.maxHeight = null;
                         if (icon) icon.style.transform = 'rotate(0deg)';
@@ -491,9 +643,8 @@
             }
         });
     }
-    setupAccordion('.accordion-item');
-    setupAccordion('.theme-night-card');
-    setupAccordion('.food-card');
+    
+    initializeExpandable();
 
 
     const weatherData = {
@@ -538,17 +689,9 @@
     if (dayPlannerContainer) {
         dayPlannerData.forEach(item => {
             const div = document.createElement('div');
-            div.classList.add('day-planner-item');
-            div.innerHTML = `<button class="day-planner-button"><span>${item.day} - ${item.title}</span><span class="transform transition-transform duration-300">▼</span></button><div class="day-planner-content"><p class="mb-2"><strong>Activities:</strong> ${item.activities}</p><p><strong>Outfit Ideas:</strong> ${item.outfits}</p></div>`;
+            div.classList.add('day-planner-item'); // Keep specific class for potential targeted styling
+            div.innerHTML = `<button class="day-planner-button" data-expandable-trigger><span>${item.day} - ${item.title}</span><span class="expand-icon transform transition-transform duration-300">▼</span></button><div class="day-planner-content expandable-content"><p class="mb-2"><strong>Activities:</strong> ${item.activities}</p><p><strong>Outfit Ideas:</strong> ${item.outfits}</p></div>`;
             dayPlannerContainer.appendChild(div);
-            const button = div.querySelector('button');
-            const content = div.querySelector('.day-planner-content');
-            const icon = button.querySelector('span:last-child');
-            button.addEventListener('click', () => {
-                const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
-                document.querySelectorAll('#dayPlanner .day-planner-content').forEach(oc => { oc.style.maxHeight = null; oc.previousElementSibling.querySelector('span:last-child').style.transform = 'rotate(0deg)';});
-                if (!isOpen) { content.style.maxHeight = content.scrollHeight + "px"; icon.style.transform = 'rotate(180deg)'; }
-            });
         });
     }
     
@@ -600,13 +743,20 @@
             const div = document.createElement('div');
             div.classList.add('checklist-item');
             if(item.done) div.classList.add('checked');
-            div.innerHTML = `<div class="checkbox-icon"></div><span>${item.text}</span>`;
+            let itemHTML = `<div class="checkbox-icon"></div><span>${item.text}</span>`;
             if (item.details) {
-                div.innerHTML += `<span class="tooltip text-xs ml-2 text-sky-500">(i)<span class="tooltiptext">${item.details}</span></span>`;
+                itemHTML += `<p class="todo-details w-full">${item.details}</p>`; // Display details directly
             }
+            div.innerHTML = itemHTML;
             todoContainer.appendChild(div);
-            div.addEventListener('click', () => {
-                div.classList.toggle('checked');
+            // Make the entire div clickable to toggle, not just the text part if details are added
+            div.querySelector('span').addEventListener('click', (e) => {
+                 e.stopPropagation(); // Prevent outer div click from firing twice
+                 div.classList.toggle('checked');
+            });
+             div.querySelector('.checkbox-icon').addEventListener('click', (e) => {
+                 e.stopPropagation();
+                 div.classList.toggle('checked');
             });
         });
     }
@@ -690,43 +840,36 @@
     if (detailedDayPlannerContainer) {
         detailedDayPlanData.forEach(item => {
             const div = document.createElement('div');
-            div.classList.add('detailed-day-item');
+            div.classList.add('detailed-day-item'); // Keep specific class
             let itemHtml = `<ul class="list-disc list-inside space-y-1">`;
             item.items.forEach(detail => itemHtml += `<li>${detail}</li>`);
             itemHtml += `</ul>`;
 
             div.innerHTML = `
-                <button class="detailed-day-button">
+                <button class="detailed-day-button" data-expandable-trigger>
                     <span>${item.date} - ${item.title}</span>
-                    <span class="transform transition-transform duration-300">▼</span>
+                    <span class="expand-icon transform transition-transform duration-300">▼</span>
                 </button>
-                <div class="detailed-day-content">${itemHtml}</div>`;
+                <div class="detailed-day-content expandable-content">${itemHtml}</div>`;
             detailedDayPlannerContainer.appendChild(div);
-
-            const button = div.querySelector('button');
-            const content = div.querySelector('.detailed-day-content');
-            const icon = button.querySelector('span:last-child');
-
-            button.addEventListener('click', () => {
-                const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
-                document.querySelectorAll('#detailedDayPlanner .detailed-day-content').forEach(otherContent => {
-                    if (otherContent !== content) {
-                        otherContent.style.maxHeight = null;
-                        otherContent.previousElementSibling.querySelector('span:last-child').style.transform = 'rotate(0deg)';
-                    }
-                });
-                if (isOpen) {
-                    content.style.maxHeight = null;
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    icon.style.transform = 'rotate(180deg)';
-                }
-            });
         });
     }
-    switchTab('overview');
+    
+    // Call initializeExpandable after all dynamic content it needs to handle is on the page.
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeExpandable();
+        switchTab('overview'); // Ensure the initial tab is set after everything is ready
+    });
+
+    // If the script runs before DOMContentLoaded (e.g. not at end of body),
+    // you might need to call switchTab('overview') inside DOMContentLoaded too, or ensure it's called last.
+    // For safety, let's ensure initial tab is set after dynamic content generation.
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => switchTab('overview'));
+    } else {
+        switchTab('overview');
+    }
+
 </script>
 </body>
 </html>
-<!-- End of HTML Document -->

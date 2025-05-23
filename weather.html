@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MSC Seascape Caribbean Weather Guide">
+    <title>Weather Guide - MSC Seascape 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body class="bg-amber-50 text-gray-800">
+    <header class="site-header">
+        <!-- ...existing header code... -->
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-xl font-bold text-sky-800">MSC Seascape</a>
+                    </div>
+                    <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
+                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Overview</a>
+                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Prep List</a>
+                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Daily Plan</a>
+                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 active">Weather</a>
+                        <a href="wardrobe.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Wardrobe</a>
+                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Packing</a>
+                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Food</a>
+                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Pro Tips</a>
+                    </div>
+                </div>
+                <!-- ...mobile menu button... -->
+            </div>
+        </nav>
+        <!-- ...mobile menu... -->
+    </header>
+
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <h1 class="section-title">☀️ Caribbean Weather Guide (Early June)</h1>
+        <p class="mb-4 text-lg">Warm, sunny, humid, with chances of tropical showers. Sun protection is key!</p>
+
+        <div class="card mb-6">
+            <h2 class="subsection-title">At a Glance</h2>
+            <ul class="list-disc list-inside space-y-1">
+                <li><strong>Temperatures:</strong> Highs 28-32°C (82-90°F), Lows 24-26°C (75-79°F)</li>
+                <li><strong>Humidity:</strong> High (70-80%)</li>
+                <li><strong>Rainfall:</strong> Possible short, intense showers</li>
+                <li><strong>UV Index:</strong> VERY HIGH to EXTREME</li>
+                <li><strong>Water Temperature:</strong> 26-28°C (79-82°F)</li>
+                <li><strong>Sea Conditions:</strong> Generally calm, light chop possible</li>
+            </ul>
+        </div>
+
+        <div class="card mb-6">
+            <h2 class="subsection-title">Port Temperature Comparison 🌡️</h2>
+            <p class="mb-3 text-center text-gray-600">Average High & Low Temperatures (°C)</p>
+            <div class="chart-container">
+                <canvas id="weatherChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="card">
+                <h2 class="subsection-title">Port-Specific Weather Notes</h2>
+                <div class="space-y-4">
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h3 class="font-semibold text-sky-700">Miami</h3>
+                        <p class="text-sm">Humidity: 69-75%, Rain: ~22 days/month</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h3 class="font-semibold text-sky-700">Ocean Cay</h3>
+                        <p class="text-sm">Humidity: ~76%, Rain: High chance of brief showers</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h3 class="font-semibold text-sky-700">Nassau</h3>
+                        <p class="text-sm">Humidity: 77-80%, Rain: 17-18 days/month</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h3 class="font-semibold text-sky-700">Falmouth</h3>
+                        <p class="text-sm">Humidity: High, Rain: ~21 days/month</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded">
+                        <h3 class="font-semibold text-sky-700">George Town</h3>
+                        <p class="text-sm">Humidity: 73-82%, Rain: ~12 days/month</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="subsection-title">Essential Weather Prep</h2>
+                <div class="space-y-4">
+                    <div class="p-3 bg-sky-50 rounded">
+                        <h3 class="font-semibold text-sky-700">Sun Protection</h3>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>High-SPF sunscreen (reef-safe)</li>
+                            <li>Wide-brimmed hat</li>
+                            <li>Polarized sunglasses</li>
+                            <li>UV-protective clothing</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 bg-sky-50 rounded">
+                        <h3 class="font-semibold text-sky-700">Rain Gear</h3>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>Compact umbrella</li>
+                            <li>Light rain jacket</li>
+                            <li>Quick-dry clothing</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 bg-sky-50 rounded">
+                        <h3 class="font-semibold text-sky-700">Dehydration Prevention</h3>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>Reusable water bottle</li>
+                            <li>Electrolyte packets</li>
+                            <li>Moisturizer & lip balm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="subsection-title">Weather Tips & Warnings</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="p-4 bg-yellow-50 rounded-lg">
+                    <h3 class="font-semibold text-yellow-800">☀️ UV Warning</h3>
+                    <p class="text-sm">Caribbean sun is intense! Apply sunscreen every 2 hours, even on cloudy days.</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-800">💧 Hydration Alert</h3>
+                    <p class="text-sm">High humidity increases dehydration risk. Drink more water than usual.</p>
+                </div>
+                <div class="p-4 bg-purple-50 rounded-lg">
+                    <h3 class="font-semibold text-purple-800">🌧️ Rain Ready</h3>
+                    <p class="text-sm">Afternoon showers common. Keep compact umbrella in day bag.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-8 text-sm text-gray-500">
+        <p>Happy Cruising on the MSC Seascape! ✨</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
