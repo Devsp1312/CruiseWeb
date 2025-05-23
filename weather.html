@@ -7,131 +7,202 @@
     <title>Weather Guide - MSC Seascape 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="common.css">
+    <style>
+        .map-container {
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .weather-card {
+            transition: all 0.3s ease;
+        }
+        .weather-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0ea5e9;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .temp-switch {
+            background: linear-gradient(45deg, #0ea5e9, #06b6d4);
+            transition: all 0.3s ease;
+        }
+        .temp-switch:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body class="bg-amber-50 text-gray-800">
-    <header class="site-header">
-        <!-- ...existing header code... -->
+    <header class="site-header" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%); color: white;">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="index.html" class="text-xl font-bold text-sky-800">MSC Seascape</a>
+                        <a href="index.html" class="text-xl font-bold text-white">MSC Seascape</a>
                     </div>
                     <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
-                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Overview</a>
-                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Prep List</a>
-                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Daily Plan</a>
-                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 active">Weather</a>
-                        <a href="wardrobe.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Wardrobe</a>
-                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Packing</a>
-                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Food</a>
-                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Pro Tips</a>
+                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:text-sky-200">Overview</a>
+                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:text-sky-200">Prep List</a>
+                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:text-sky-200">Daily Plan</a>
+                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white bg-white bg-opacity-20 active">Weather</a>
+                        <a href="wardrobe.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:text-sky-200">Wardrobe</a>
+                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:text-sky-200">Packing</a>
+                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:text-sky-200">Food</a>
+                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:text-sky-200">Pro Tips</a>
                     </div>
                 </div>
-                <!-- ...mobile menu button... -->
+                <div class="flex items-center lg:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-sky-200 hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-300">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </nav>
-        <!-- ...mobile menu... -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600">Overview</a>
+                <a href="prep.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600">Prep List</a>
+                <a href="dailyplan.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600">Daily Plan</a>
+                <a href="weather.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-sky-600 bg-sky-50 active">Weather</a>
+                <a href="wardrobe.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600">Wardrobe</a>
+                <a href="packing.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600">Packing</a>
+                <a href="food.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600">Food</a>
+                <a href="protips.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600">Pro Tips</a>
+            </div>
+        </div>
     </header>
 
     <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <h1 class="section-title">☀️ Caribbean Weather Guide (Early June)</h1>
-        <p class="mb-4 text-lg">Warm, sunny, humid, with chances of tropical showers. Sun protection is key!</p>
-
-        <div class="card mb-6">
-            <h2 class="subsection-title">At a Glance</h2>
-            <ul class="list-disc list-inside space-y-1">
-                <li><strong>Temperatures:</strong> Highs 28-32°C (82-90°F), Lows 24-26°C (75-79°F)</li>
-                <li><strong>Humidity:</strong> High (70-80%)</li>
-                <li><strong>Rainfall:</strong> Possible short, intense showers</li>
-                <li><strong>UV Index:</strong> VERY HIGH to EXTREME</li>
-                <li><strong>Water Temperature:</strong> 26-28°C (79-82°F)</li>
-                <li><strong>Sea Conditions:</strong> Generally calm, light chop possible</li>
-            </ul>
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+            <h1 class="section-title">☀️ Caribbean Weather Guide</h1>
+            <div class="flex items-center gap-4 mt-4 sm:mt-0">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium">°C</span>
+                    <button id="tempToggle" class="temp-switch relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
+                        <span class="sr-only">Toggle temperature unit</span>
+                        <span id="toggleSlider" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1"></span>
+                    </button>
+                    <span class="text-sm font-medium">°F</span>
+                </div>
+                <button id="refreshWeather" class="px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    Refresh
+                </button>
+            </div>
         </div>
 
-        <div class="card mb-6">
-            <h2 class="subsection-title">Port Temperature Comparison 🌡️</h2>
-            <p class="mb-3 text-center text-gray-600">Average High & Low Temperatures (°C)</p>
-            <div class="chart-container">
-                <canvas id="weatherChart"></canvas>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="card">
+                <h2 class="subsection-title">🗺️ Cruise Route Map</h2>
+                <div id="cruiseMap" class="map-container"></div>
+                <p class="mt-2 text-sm text-gray-600 text-center">Interactive map showing your cruise destinations</p>
             </div>
+            
+            <div class="card">
+                <h2 class="subsection-title">📊 Temperature Forecast</h2>
+                <div class="chart-container">
+                    <canvas id="weatherChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="weatherCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            <!-- Weather cards will be populated by JavaScript -->
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div class="card">
-                <h2 class="subsection-title">Port-Specific Weather Notes</h2>
-                <div class="space-y-4">
-                    <div class="p-3 bg-gray-50 rounded">
-                        <h3 class="font-semibold text-sky-700">Miami</h3>
-                        <p class="text-sm">Humidity: 69-75%, Rain: ~22 days/month</p>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded">
-                        <h3 class="font-semibold text-sky-700">Ocean Cay</h3>
-                        <p class="text-sm">Humidity: ~76%, Rain: High chance of brief showers</p>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded">
-                        <h3 class="font-semibold text-sky-700">Nassau</h3>
-                        <p class="text-sm">Humidity: 77-80%, Rain: 17-18 days/month</p>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded">
-                        <h3 class="font-semibold text-sky-700">Falmouth</h3>
-                        <p class="text-sm">Humidity: High, Rain: ~21 days/month</p>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded">
-                        <h3 class="font-semibold text-sky-700">George Town</h3>
-                        <p class="text-sm">Humidity: 73-82%, Rain: ~12 days/month</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
                 <h2 class="subsection-title">Essential Weather Prep</h2>
                 <div class="space-y-4">
                     <div class="p-3 bg-sky-50 rounded">
-                        <h3 class="font-semibold text-sky-700">Sun Protection</h3>
-                        <ul class="list-disc list-inside text-sm">
-                            <li>High-SPF sunscreen (reef-safe)</li>
+                        <h3 class="font-semibold text-sky-700">☀️ Sun Protection</h3>
+                        <ul class="list-disc list-inside text-sm mt-2">
+                            <li>SPF 50+ reef-safe sunscreen</li>
                             <li>Wide-brimmed hat</li>
                             <li>Polarized sunglasses</li>
                             <li>UV-protective clothing</li>
                         </ul>
                     </div>
                     <div class="p-3 bg-sky-50 rounded">
-                        <h3 class="font-semibold text-sky-700">Rain Gear</h3>
-                        <ul class="list-disc list-inside text-sm">
+                        <h3 class="font-semibold text-sky-700">🌧️ Rain Gear</h3>
+                        <ul class="list-disc list-inside text-sm mt-2">
                             <li>Compact umbrella</li>
                             <li>Light rain jacket</li>
                             <li>Quick-dry clothing</li>
+                            <li>Waterproof phone case</li>
                         </ul>
                     </div>
                     <div class="p-3 bg-sky-50 rounded">
-                        <h3 class="font-semibold text-sky-700">Dehydration Prevention</h3>
-                        <ul class="list-disc list-inside text-sm">
+                        <h3 class="font-semibold text-sky-700">💧 Hydration</h3>
+                        <ul class="list-disc list-inside text-sm mt-2">
                             <li>Reusable water bottle</li>
                             <li>Electrolyte packets</li>
-                            <li>Moisturizer & lip balm</li>
+                            <li>Cooling towel</li>
+                            <li>Aloe vera gel</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="subsection-title">🌡️ Climate Insights</h2>
+                <div class="space-y-4">
+                    <div class="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                        <h3 class="font-semibold text-yellow-800">☀️ UV Index: EXTREME</h3>
+                        <p class="text-sm mt-1">Caribbean sun is intense year-round. Reapply sunscreen every 2 hours, even on cloudy days.</p>
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                        <h3 class="font-semibold text-blue-800">💧 High Humidity Alert</h3>
+                        <p class="text-sm mt-1">Expect 70-85% humidity. Drink more water than usual and take breaks in air conditioning.</p>
+                    </div>
+                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                        <h3 class="font-semibold text-purple-800">⛈️ Tropical Showers</h3>
+                        <p class="text-sm mt-1">Brief afternoon thunderstorms are common. They usually pass quickly but can be intense.</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h2 class="subsection-title">Weather Tips & Warnings</h2>
+            <h2 class="subsection-title">🏝️ Port-Specific Weather Tips</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="p-4 bg-yellow-50 rounded-lg">
-                    <h3 class="font-semibold text-yellow-800">☀️ UV Warning</h3>
-                    <p class="text-sm">Caribbean sun is intense! Apply sunscreen every 2 hours, even on cloudy days.</p>
+                <div class="p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg">
+                    <h3 class="font-semibold text-orange-800">🏙️ Miami</h3>
+                    <p class="text-sm mt-2">Urban heat island effect. Seek shade during midday hours. Great shopping malls for AC breaks!</p>
                 </div>
-                <div class="p-4 bg-blue-50 rounded-lg">
-                    <h3 class="font-semibold text-blue-800">💧 Hydration Alert</h3>
-                    <p class="text-sm">High humidity increases dehydration risk. Drink more water than usual.</p>
+                <div class="p-4 bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg">
+                    <h3 class="font-semibold text-teal-800">🏝️ Ocean Cay</h3>
+                    <p class="text-sm mt-2">MSC's private island. Minimal shade, so bring portable umbrella. Perfect for water activities!</p>
                 </div>
-                <div class="p-4 bg-purple-50 rounded-lg">
-                    <h3 class="font-semibold text-purple-800">🌧️ Rain Ready</h3>
-                    <p class="text-sm">Afternoon showers common. Keep compact umbrella in day bag.</p>
+                <div class="p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg">
+                    <h3 class="font-semibold text-pink-800">🏖️ Nassau</h3>
+                    <p class="text-sm mt-2">Historic downtown can be hot. Atlantis Resort has indoor attractions for cooling off.</p>
+                </div>
+                <div class="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+                    <h3 class="font-semibold text-green-800">🌴 Falmouth</h3>
+                    <p class="text-sm mt-2">Mountain backdrop creates afternoon clouds. Great for rainforest tours but pack rain gear.</p>
+                </div>
+                <div class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                    <h3 class="font-semibold text-blue-800">🐠 George Town</h3>
+                    <p class="text-sm mt-2">Excellent snorkeling weather. Crystal clear waters, but strong sun reflection off water!</p>
                 </div>
             </div>
         </div>
@@ -141,6 +212,283 @@
         <p>Happy Cruising on the MSC Seascape! ✨</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script>
+        // Weather data and configuration
+        const cruisePorts = [
+            { name: "Miami", lat: 25.7617, lng: -80.1918, country: "US" },
+            { name: "Ocean Cay", lat: 25.75, lng: -79.28, country: "BS" },
+            { name: "Nassau", lat: 25.0443, lng: -77.3504, country: "BS" },
+            { name: "Falmouth", lat: 18.4925, lng: -77.6476, country: "JM" },
+            { name: "George Town", lat: 19.2866, lng: -81.3744, country: "KY" }
+        ];
+
+        let isCelsius = true;
+        let weatherData = {};
+        let map;
+        let weatherChart;
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMap();
+            initializeEventListeners();
+            loadWeatherData();
+        });
+
+        // Initialize the map
+        function initializeMap() {
+            map = L.map('cruiseMap').setView([22.5, -78.5], 6);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add markers for each port
+            cruisePorts.forEach((port, index) => {
+                const marker = L.marker([port.lat, port.lng]).addTo(map);
+                marker.bindPopup(`
+                    <div class="text-center">
+                        <h3 class="font-bold text-sky-800">${port.name}</h3>
+                        <p class="text-sm">Day ${index + 1} of cruise</p>
+                        <div id="popup-weather-${index}" class="mt-2">
+                            <div class="loading-spinner mx-auto"></div>
+                        </div>
+                    </div>
+                `);
+            });
+
+            // Draw the cruise route
+            const routeCoordinates = cruisePorts.map(port => [port.lat, port.lng]);
+            L.polyline(routeCoordinates, {
+                color: '#0ea5e9',
+                weight: 3,
+                opacity: 0.8,
+                dashArray: '10, 10'
+            }).addTo(map);
+        }
+
+        // Initialize event listeners
+        function initializeEventListeners() {
+            // Temperature unit toggle
+            document.getElementById('tempToggle').addEventListener('click', function() {
+                isCelsius = !isCelsius;
+                updateTemperatureDisplay();
+                updateChart();
+                updatePopups();
+            });
+
+            // Refresh weather button
+            document.getElementById('refreshWeather').addEventListener('click', function() {
+                loadWeatherData();
+            });
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button')?.addEventListener('click', function() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+        }
+
+        // Load weather data from OpenWeatherMap API
+        async function loadWeatherData() {
+            const apiKey = 'demo'; // Using demo mode for this example
+            const loadingHTML = '<div class="loading-spinner mx-auto"></div>';
+            
+            // Show loading state
+            document.getElementById('weatherCards').innerHTML = '<div class="col-span-full text-center py-8">' + loadingHTML + '<p class="mt-2 text-gray-600">Loading weather data...</p></div>';
+
+            try {
+                // In a real implementation, you would use actual API calls
+                // For demo purposes, we'll simulate weather data
+                await simulateWeatherData();
+                
+                renderWeatherCards();
+                updateChart();
+                updatePopups();
+            } catch (error) {
+                console.error('Error loading weather data:', error);
+                showOfflineWeatherData();
+            }
+        }
+
+        // Simulate weather data (replace with actual API calls)
+        async function simulateWeatherData() {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            weatherData = {
+                "Miami": { temp: 29, feels_like: 33, humidity: 72, description: "Partly cloudy", icon: "02d", wind_speed: 12 },
+                "Ocean Cay": { temp: 28, feels_like: 32, humidity: 76, description: "Sunny", icon: "01d", wind_speed: 15 },
+                "Nassau": { temp: 30, feels_like: 34, humidity: 78, description: "Scattered showers", icon: "10d", wind_speed: 18 },
+                "Falmouth": { temp: 27, feels_like: 31, humidity: 80, description: "Thunderstorms", icon: "11d", wind_speed: 8 },
+                "George Town": { temp: 29, feels_like: 33, humidity: 74, description: "Clear sky", icon: "01d", wind_speed: 20 }
+            };
+        }
+
+        // Convert temperature between Celsius and Fahrenheit
+        function convertTemp(celsius, toCelsius = true) {
+            if (toCelsius) {
+                return celsius;
+            } else {
+                return Math.round((celsius * 9/5) + 32);
+            }
+        }
+
+        // Get weather icon emoji
+        function getWeatherEmoji(iconCode) {
+            const iconMap = {
+                '01d': '☀️', '01n': '🌙',
+                '02d': '⛅', '02n': '☁️',
+                '03d': '☁️', '03n': '☁️',
+                '04d': '☁️', '04n': '☁️',
+                '09d': '🌧️', '09n': '🌧️',
+                '10d': '🌦️', '10n': '🌧️',
+                '11d': '⛈️', '11n': '⛈️',
+                '13d': '❄️', '13n': '❄️',
+                '50d': '🌫️', '50n': '🌫️'
+            };
+            return iconMap[iconCode] || '🌤️';
+        }
+
+        // Render weather cards
+        function renderWeatherCards() {
+            const container = document.getElementById('weatherCards');
+            container.innerHTML = '';
+
+            Object.entries(weatherData).forEach(([city, data]) => {
+                const temp = convertTemp(data.temp, isCelsius);
+                const feelsLike = convertTemp(data.feels_like, isCelsius);
+                const unit = isCelsius ? '°C' : '°F';
+                
+                const card = document.createElement('div');
+                card.className = 'weather-card bg-white rounded-xl p-6 shadow-lg border border-gray-100';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">${city}</h3>
+                        <span class="text-3xl">${getWeatherEmoji(data.icon)}</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-sky-600">${temp}${unit}</span>
+                            <span class="text-sm text-gray-500">Feels ${feelsLike}${unit}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 capitalize">${data.description}</p>
+                        <div class="flex justify-between text-xs text-gray-500 mt-3">
+                            <span>💧 ${data.humidity}%</span>
+                            <span>💨 ${data.wind_speed} km/h</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Update temperature display toggle
+        function updateTemperatureDisplay() {
+            const slider = document.getElementById('toggleSlider');
+            if (isCelsius) {
+                slider.style.transform = 'translateX(4px)';
+            } else {
+                slider.style.transform = 'translateX(24px)';
+            }
+        }
+
+        // Update chart with current temperature unit
+        function updateChart() {
+            if (weatherChart) {
+                weatherChart.destroy();
+            }
+
+            const ctx = document.getElementById('weatherChart').getContext('2d');
+            const cities = Object.keys(weatherData);
+            const temperatures = cities.map(city => convertTemp(weatherData[city].temp, isCelsius));
+            const unit = isCelsius ? '°C' : '°F';
+
+            weatherChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: cities,
+                    datasets: [{
+                        label: `Temperature (${unit})`,
+                        data: temperatures,
+                        backgroundColor: 'rgba(14, 165, 233, 0.6)',
+                        borderColor: 'rgba(14, 165, 233, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: Math.min(...temperatures) - 5,
+                            max: Math.max(...temperatures) + 5,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update map popup content
+        function updatePopups() {
+            cruisePorts.forEach((port, index) => {
+                const popupElement = document.getElementById(`popup-weather-${index}`);
+                if (popupElement && weatherData[port.name]) {
+                    const data = weatherData[port.name];
+                    const temp = convertTemp(data.temp, isCelsius);
+                    const unit = isCelsius ? '°C' : '°F';
+                    
+                    popupElement.innerHTML = `
+                        <div class="text-sm">
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="text-lg">${getWeatherEmoji(data.icon)}</span>
+                                <span class="font-bold">${temp}${unit}</span>
+                            </div>
+                            <p class="capitalize">${data.description}</p>
+                            <p class="text-xs text-gray-500">💧 ${data.humidity}%</p>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Show offline weather data as fallback
+        function showOfflineWeatherData() {
+            const container = document.getElementById('weatherCards');
+            container.innerHTML = `
+                <div class="col-span-full bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-yellow-800 mb-2">🌐 Live Weather Unavailable</h3>
+                    <p class="text-yellow-700 mb-4">Showing typical June weather patterns for your cruise destinations.</p>
+                </div>
+            `;
+            
+            // Show typical June weather
+            weatherData = {
+                "Miami": { temp: 29, feels_like: 33, humidity: 72, description: "Partly cloudy", icon: "02d", wind_speed: 12 },
+                "Ocean Cay": { temp: 28, feels_like: 32, humidity: 76, description: "Sunny", icon: "01d", wind_speed: 15 },
+                "Nassau": { temp: 30, feels_like: 34, humidity: 78, description: "Scattered showers", icon: "10d", wind_speed: 18 },
+                "Falmouth": { temp: 27, feels_like: 31, humidity: 80, description: "Thunderstorms", icon: "11d", wind_speed: 8 },
+                "George Town": { temp: 29, feels_like: 33, humidity: 74, description: "Clear sky", icon: "01d", wind_speed: 20 }
+            };
+            
+            renderWeatherCards();
+            updateChart();
+        }
+    </script>
 </body>
 </html>
