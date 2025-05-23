@@ -7,14 +7,34 @@
     <title>Dining Guide - MSC Seascape 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="common.css">
+    <style>
+        .food-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #fff, #fefefe);
+        }
+        .food-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .tip-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .warning-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .must-try {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+        }
+    </style>
 </head>
-<body class="bg-amber-50 text-gray-800">
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 text-gray-800">
     <header class="site-header">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="index.html" class="text-xl font-bold text-sky-800">MSC Seascape</a>
+                        <a href="index.html" class="text-xl font-bold text-sky-800">🚢 MSC Seascape</a>
                     </div>
                     <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
                         <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Overview</a>
@@ -52,107 +72,285 @@
     </header>
 
     <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <h1 class="section-title">🍽️ Dining Guide</h1>
+        <h1 class="text-4xl font-bold text-center mb-8 text-orange-800">🍽️ Your Complete Dining Guide</h1>
 
-        <div class="card mb-6">
-            <h2 class="subsection-title">🍸 Drink Packages</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-sky-700 mb-2">Easy Package (Selected)</h3>
-                    <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>Unlimited drinks up to $6</li>
-                        <li>Includes:
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Draft beer</li>
-                                <li>• House wines by the glass</li>
-                                <li>• Selected spirits and cocktails</li>
-                                <li>• Non-alcoholic cocktails</li>
-                                <li>• Soft drinks</li>
-                                <li>• Water</li>
-                                <li>• Coffee drinks</li>
-                            </ul>
-                        </li>
+        <!-- Quick Tips Section -->
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 mb-8 border border-green-200">
+            <h2 class="text-2xl font-bold text-green-800 mb-4">💡 Essential Dining Tips</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start space-x-3">
+                    <span class="text-2xl">📱</span>
+                    <div>
+                        <h3 class="font-semibold text-green-800">QR Code Ordering</h3>
+                        <p class="text-sm text-gray-700">Every table has QR codes for drink orders (sometimes doesn't work)</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <span class="text-2xl">👨‍🍳</span>
+                    <div>
+                        <h3 class="font-semibold text-green-800">Same Waiter</h3>
+                        <p class="text-sm text-gray-700">You'll have the same waiter for all 7 days - build that rapport!</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <span class="text-2xl">📅</span>
+                    <div>
+                        <h3 class="font-semibold text-green-800">Daily Menu Changes</h3>
+                        <p class="text-sm text-gray-700">Main dining hall menu changes every day</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <span class="text-2xl">🥤</span>
+                    <div>
+                        <h3 class="font-semibold text-green-800">Drink Package Tip</h3>
+                        <p class="text-sm text-gray-700">Buy one drink package for the room - it's worth it!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drink Package -->
+        <div class="food-card bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-orange-800 mb-4">🍸 Drink Package Info</h2>
+            <div class="bg-gradient-to-r from-blue-50 to-sky-50 p-4 rounded-xl border border-blue-200">
+                <h3 class="font-semibold text-sky-700 mb-2">Easy Package (Selected) ✨</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-2">Unlimited drinks up to $6 includes:</p>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>🍺 Draft beer</li>
+                            <li>🍷 House wines by the glass</li>
+                            <li>🍹 Selected spirits and cocktails</li>
+                            <li>🥤 Non-alcoholic cocktails</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>🥤 Soft drinks</li>
+                            <li>💧 Water</li>
+                            <li>☕ Coffee drinks</li>
+                            <li>🧊 Juices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dining -->
+        <div class="food-card bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-orange-800 mb-4">🍽️ Main Dining Halls</h2>
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-xl border border-purple-200 mb-4">
+                <h3 class="font-semibold text-purple-700 mb-2">Your Seating Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p><strong>Time:</strong> 7:45 PM - 9:45 PM (2nd Seating)</p>
+                        <p><strong>Location:</strong> Central Park Restaurant (Deck 6)</p>
+                    </div>
+                    <div>
+                        <p><strong>Table Size:</strong> 8 persons</p>
+                        <p><strong>Dress Code:</strong> Smart Casual</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                <h4 class="font-semibold text-yellow-800 mb-2">💡 Pro Tips</h4>
+                <ul class="text-sm space-y-1 text-gray-700">
+                    <li>• There are 4 different dining halls total</li>
+                    <li>• If you don't like the crowd, ask to change your time</li>
+                    <li>• Food quality is hit and miss - some love it, some don't</li>
+                    <li>• One night features Indian food (aloo gobi and naan!)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Must Try Items -->
+        <div class="must-try rounded-2xl p-6 mb-8">
+            <h2 class="text-2xl font-bold text-amber-800 mb-4">⭐ Must-Try Items</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <h3 class="font-semibold text-orange-700 mb-2">🍝 Main Dishes</h3>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Roasted vegetable lasagna</li>
+                        <li>• Pennette pasta</li>
+                        <li>• Caribbean crumble (Day 6)</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <h3 class="font-semibold text-orange-700 mb-2">🍰 Amazing Desserts</h3>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Melting cream cake (better than cheesecake!)</li>
+                        <li>• Tiramisu (Shiv's favorite)</li>
+                        <li>• Try ALL different dessert types</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <h3 class="font-semibold text-orange-700 mb-2">🍕 Casual Favorites</h3>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Pizza (surprisingly good!)</li>
+                        <li>• Fresh fruit at buffet</li>
+                        <li>• Qdoba-style bowls</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="card mb-6">
-            <h2 class="subsection-title">🍽️ Main Dining Rooms</h2>
+        <!-- Specialty Restaurants -->
+        <div class="food-card bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-orange-800 mb-4">🌮 Specialty Restaurants</h2>
             <div class="space-y-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-sky-700 mb-2">Main Seating Information</h3>
-                    <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>Our Seating: Second Seating (8:00 PM)</li>
-                        <li>Location: Central Park Restaurant (Deck 6)</li>
-                        <li>Table Size: 8 persons</li>
-                        <li>Dress Code: Smart Casual (check wardrobe guide)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-6">
-            <h2 class="subsection-title">🍳 Specialty Restaurants</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-sky-700 mb-2">Reservation Required</h3>
-                    <ul class="list-disc list-inside text-sm space-y-2">
-                        <li>Butcher's Cut (Steakhouse)
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Location: Deck 8</li>
-                                <li>• Surcharge applies</li>
-                                <li>• Reservation recommended</li>
-                            </ul>
-                        </li>
-                        <li>HOLA! Tacos & Cantina
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                <div class="bg-gradient-to-r from-red-50 to-orange-50 p-4 rounded-xl border border-red-200">
+                    <h3 class="font-semibold text-red-700 mb-2">HOLA! Tacos & Cantina 🌯</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <ul class="text-sm space-y-1 text-gray-700">
                                 <li>• Location: Deck 8</li>
                                 <li>• À la carte pricing</li>
                                 <li>• Casual atmosphere</li>
+                                <li>• <strong>Make reservation!</strong></li>
                             </ul>
-                        </li>
-                        <li>Kaito Teppanyaki
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Location: Deck 7</li>
-                                <li>• Fixed price menu</li>
-                                <li>• Book early - limited seating</li>
+                        </div>
+                        <div class="tip-badge text-white p-3 rounded-lg">
+                            <p class="text-sm font-medium">📸 Menu photo available - check it out before going!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-xl">
+                        <h4 class="font-semibold text-gray-700 mb-2">Butcher's Cut (Steakhouse)</h4>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>• Deck 8, surcharge applies</li>
+                            <li>• Reservation recommended</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl">
+                        <h4 class="font-semibold text-gray-700 mb-2">Kaito Teppanyaki</h4>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>• Deck 7, fixed price menu</li>
+                            <li>• Book early - limited seating</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Casual Dining -->
+        <div class="food-card bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-orange-800 mb-4">🍦 Casual Dining Options</h2>
+            <div class="space-y-4">
+                <div class="bg-gradient-to-r from-green-50 to-teal-50 p-4 rounded-xl border border-green-200">
+                    <h3 class="font-semibold text-green-700 mb-2">Marketplace Buffet 🍽️ (24/7!)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <ul class="text-sm space-y-1 text-gray-700">
+                                <li>• Location: Deck 16</li>
+                                <li>• Open 24/7 - only place that is!</li>
+                                <li>• No reservation needed</li>
+                                <li>• Make your own sandwiches (Subway-style)</li>
                             </ul>
-                        </li>
+                        </div>
+                        <div class="warning-badge text-white p-3 rounded-lg">
+                            <p class="text-sm font-medium">⚠️ Avoid dinner buffet crowds - eat early or late. Try to eat lunch out, dinner in!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <h4 class="font-semibold text-blue-700 mb-2">Sports Bar</h4>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>• Location: Deck 7</li>
+                            <li>• American classics</li>
+                            <li>• Open late</li>
+                        </ul>
+                    </div>
+                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-200">
+                        <h4 class="font-semibold text-pink-700 mb-2">Sweet Treats</h4>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>• Chocolate bar available</li>
+                            <li>• Lots of dessert options</li>
+                            <li>• Life has food too!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIY Options -->
+        <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-6 mb-8 border border-cyan-200">
+            <h2 class="text-2xl font-bold text-cyan-800 mb-4">🥪 Make Your Own</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-4">
+                    <h3 class="font-semibold text-cyan-700 mb-2">Sandwich Station</h3>
+                    <p class="text-sm text-gray-700 mb-2">Create Subway-style sandwiches with:</p>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Different bread varieties</li>
+                        <li>• Fresh ingredients</li>
+                        <li>• Chips available</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-4">
+                    <h3 class="font-semibold text-cyan-700 mb-2">Bowl Station</h3>
+                    <p class="text-sm text-gray-700 mb-2">Qdoba-style bowls:</p>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Choose your base</li>
+                        <li>• Add proteins & toppings</li>
+                        <li>• Customize to your taste</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="card mb-6">
-            <h2 class="subsection-title">🍦 Casual Dining</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <ul class="list-disc list-inside text-sm space-y-2">
-                        <li>Marketplace Buffet
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Location: Deck 16</li>
-                                <li>• Open for breakfast, lunch, and dinner</li>
-                                <li>• No reservation needed</li>
-                            </ul>
-                        </li>
-                        <li>Sports Bar
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Location: Deck 7</li>
-                                <li>• American classics</li>
-                                <li>• Open late</li>
-                            </ul>
-                        </li>
+        <!-- Strategy Section -->
+        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-6">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">🎯 Dining Strategy</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white rounded-xl p-4">
+                    <h3 class="font-semibold text-indigo-700 mb-2">Timing Tips</h3>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Eat buffet early or late</li>
+                        <li>• Avoid dinner buffet rush</li>
+                        <li>• Can change dining times</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-4">
+                    <h3 class="font-semibold text-indigo-700 mb-2">Quality Expectations</h3>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Food is hit and miss</li>
+                        <li>• Some love it, some don't</li>
+                        <li>• Try everything once!</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-4">
+                    <h3 class="font-semibold text-indigo-700 mb-2">Best Approach</h3>
+                    <ul class="text-sm space-y-1 text-gray-600">
+                        <li>• Lunch out, dinner in</li>
+                        <li>• Reserve Hola Tacos</li>
+                        <li>• Try all desserts!</li>
                     </ul>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="text-center py-8 text-sm text-gray-500">
-        <p>Bon Appétit! 🍽️</p>
+    <footer class="bg-gradient-to-r from-orange-400 to-red-500 text-white py-8 mt-12">
+        <div class="text-center">
+            <div class="text-4xl mb-2">🍽️</div>
+            <p class="text-lg font-semibold">Bon Appétit on the High Seas!</p>
+            <p class="text-orange-100 text-sm">May your cruise dining be delicious and memorable</p>
+        </div>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
 </body>
 </html>
