@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MSC Seascape Cruise Pro Tips">
+    <title>Pro Tips - MSC Seascape 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body class="bg-amber-50 text-gray-800">
+    <header class="site-header">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-xl font-bold text-sky-800">MSC Seascape</a>
+                    </div>
+                    <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
+                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Overview</a>
+                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Prep List</a>
+                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Daily Plan</a>
+                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Weather</a>
+                        <a href="wardrobe.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Wardrobe</a>
+                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Packing</a>
+                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Food</a>
+                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 active">Pro Tips</a>
+                    </div>
+                </div>
+                <div class="flex items-center lg:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Overview</a>
+                <a href="prep.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Prep List</a>
+                <a href="dailyplan.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Daily Plan</a>
+                <a href="weather.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Weather</a>
+                <a href="wardrobe.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Wardrobe</a>
+                <a href="packing.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Packing</a>
+                <a href="food.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Food</a>
+                <a href="protips.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600 active">Pro Tips</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <h1 class="section-title">🎯 Pro Tips</h1>
+
+        <div class="card mb-6">
+            <h2 class="subsection-title">🎟️ Before You Board</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li>Download the MSC App
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• View daily schedules</li>
+                                <li>• Make restaurant reservations</li>
+                                <li>• Book excursions</li>
+                            </ul>
+                        </li>
+                        <li>Arrive Early
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Less crowded check-in</li>
+                                <li>• Time to explore the ship</li>
+                                <li>• First pick at dining reservations</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-6">
+            <h2 class="subsection-title">💰 Money Saving Tips</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li>Drink Package Strategy
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Calculate your expected consumption</li>
+                                <li>• Consider port days when you'll be off ship</li>
+                                <li>• Remember specialty coffees are included</li>
+                            </ul>
+                        </li>
+                        <li>Excursions
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Book early for best prices</li>
+                                <li>• Consider independent tours for savings</li>
+                                <li>• Group with other passengers to share costs</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-6">
+            <h2 class="subsection-title">🎮 Entertainment Tips</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li>Shows
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Book shows on first day</li>
+                                <li>• Arrive 15-20 minutes early</li>
+                                <li>• Check for matinee performances</li>
+                            </ul>
+                        </li>
+                        <li>Activities
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Join the MSC Voyagers Club</li>
+                                <li>• Participate in trivia for prizes</li>
+                                <li>• Check daily schedule for special events</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-6">
+            <h2 class="subsection-title">🌊 At Sea Days</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li>Pool Deck Strategy
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Early morning for best spots</li>
+                                <li>• Consider indoor pool on windy days</li>
+                                <li>• Afternoon is usually less crowded</li>
+                            </ul>
+                        </li>
+                        <li>Spa & Fitness
+                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
+                                <li>• Book spa on port days for discounts</li>
+                                <li>• Gym is least busy during dinner times</li>
+                                <li>• Join fitness classes early in cruise</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-8 text-sm text-gray-500">
+        <p>Happy Cruising! ⚓</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
