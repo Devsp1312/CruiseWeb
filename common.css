@@ -160,6 +160,54 @@
 }
 
 /* Header */
+/* Common styles for all pages */
+.site-header {
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.5rem 0;
+}
+
+.nav-link {
+    color: #1f2937;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #0284c7;
+}
+
+.nav-link.active {
+    color: #0284c7;
+    font-weight: 600;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0c4a6e;
+    margin-bottom: 1rem;
+}
+
+/* Mobile menu styles */
+#mobile-menu {
+    transition: all 0.3s ease-in-out;
+}
+
+#mobile-menu .nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+}
+
+#mobile-menu .nav-link:hover {
+    background-color: #f3f4f6;
+}
+
+#mobile-menu .nav-link.active {
+    background-color: #e0f2fe;
+    color: #0284c7;
+}
+
 .site-header {
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

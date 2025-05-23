@@ -6,28 +6,89 @@
     <meta name="description" content="MSC Seascape Cruise Pre-Cruise Preparation Guide">
     <title>Prep Guide - MSC Seascape 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="common.css">
+    <style>
+        .site-header {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link {
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #bae6fd;
+            transform: translateY(-1px);
+        }
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 0.375rem;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .status-confirmed {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .gradient-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #e0f2fe;
+        }
+    </style>
 </head>
-<body class="bg-amber-50 text-gray-800">
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 text-gray-800 min-h-screen">
     <header class="site-header">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="index.html" class="text-xl font-bold text-sky-800">MSC Seascape</a>
+                        <a href="index.html" class="text-xl font-bold text-white">MSC Seascape</a>
                     </div>
                     <div class="hidden lg:ml-6 lg:flex lg:space-x-4">
-                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Overview</a>
-                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 active">Prep List</a>
-                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Daily Plan</a>
-                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Weather</a>                       
-                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Packing</a>
-                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Food</a>
-                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600">Pro Tips</a>
+                        <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Overview</a>
+                        <a href="prep.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium active">Prep List</a>
+                        <a href="dailyplan.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Daily Plan</a>
+                        <a href="weather.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Weather</a>                       
+                        <a href="packing.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Packing</a>
+                        <a href="food.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Food</a>
+                        <a href="protips.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Pro Tips</a>
                     </div>
                 </div>
                 <div class="flex items-center lg:hidden">
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-expanded="false">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-200 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -36,16 +97,15 @@
                 </div>
             </div>
         </nav>
-        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+        <div id="mobile-menu" class="lg:hidden hidden bg-white/10 backdrop-blur-sm border-t border-white/20">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Overview</a>
-                <a href="prep.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600 active">Prep List</a>
-                <a href="dailyplan.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Daily Plan</a>
-                <a href="weather.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Weather</a>
-                <a href="wardrobe.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Wardrobe</a>
-                <a href="packing.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Packing</a>
-                <a href="food.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Food</a>
-                <a href="protips.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-sky-600">Pro Tips</a>
+                <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Overview</a>
+                <a href="prep.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium active">Prep List</a>
+                <a href="dailyplan.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Daily Plan</a>
+                <a href="weather.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Weather</a>
+                <a href="packing.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Packing</a>
+                <a href="food.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Food</a>
+                <a href="protips.html" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Pro Tips</a>
             </div>
         </div>
     </header>
@@ -53,136 +113,400 @@
     <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <h1 class="section-title">🎯 Pre-Cruise Preparation Guide</h1>
         
-        <div class="card mb-6">
-            <h2 class="subsection-title">🏨 Hotel & Transportation</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-sky-700 mb-2">May 31 - Arrival Night</h3>
-                    <ul class="list-disc list-inside space-y-2 text-sm">
-                        <li><strong>Hotel:</strong> Hyatt Place Fort Lauderdale Airport/Cruise Port
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Phone: +1 954 922 0436 (opt 4 for shuttle)</li>
-                                <li>• Late check-in okay (arrival ~1 AM)</li>
-                                <li>• Karan/Anant need special check-in arrangements</li>
-                                <li>• Breakfast included</li>
-                            </ul>
-                        </li>
-                        <li><strong>Flight:</strong> JetBlue #305
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• EWR Terminal A → FLL</li>
-                                <li>• Departure: 9:00 PM</li>
-                                <li>• Arrival: 12:13 AM</li>
-                                <li>• Confirmation: NSEWLZ</li>
-                            </ul>
-                        </li>
-                    </ul>
+        <div class="card mb-8">
+            <h2 class="subsection-title">✈️ Flight & Hotel Information</h2>
+            <div class="space-y-6">
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-400 p-6 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">✈️</span>
+                        May 31 - Arrival Day
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white/60 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2 flex items-center">
+                                <span class="mr-2">🛫</span>Flight Details
+                            </h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Flight:</span>
+                                    <span>JetBlue B6 105 (A320)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Route:</span>
+                                    <span>Newark → Fort Lauderdale</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Departure:</span>
+                                    <span>2:56 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Arrival:</span>
+                                    <span>6:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Duration:</span>
+                                    <span>3hrs 4mins (Nonstop)</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">Status:</span>
+                                    <span class="status-badge status-confirmed">Confirmed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2 flex items-center">
+                                <span class="mr-2">🏨</span>Hotel Details
+                            </h4>
+                            <div class="space-y-2 text-sm">
+                                <div><strong>Hotel:</strong> Hyatt Place Fort Lauderdale Airport/Cruise Port</div>
+                                <div><strong>Phone:</strong> +1 954 922 0436 (opt 4 for shuttle)</div>
+                                <div><strong>Check-in:</strong> ~8:30 PM arrival</div>
+                                <div><strong>Special:</strong> Karan/Anant need arrangements</div>
+                                <div><strong>Included:</strong> Breakfast</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-sky-700 mb-2">June 1 - Embarkation Day</h3>
-                    <ul class="list-disc list-inside space-y-2 text-sm">
-                        <li>Hotel checkout by 12:00 PM</li>
-                        <li>Target/store run for snacks in morning</li>
-                        <li>Lunch nearby (e.g., Chipotle)</li>
-                        <li>Transport to cruise port:
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Address: 2200 N Cruise Blvd, Miami, FL 33132</li>
-                                <li>• Options: Hotel shuttle or Uber</li>
-                                <li>• Arrive by 3:00 PM (all aboard 5:00 PM)</li>
+                <div class="bg-gradient-to-r from-blue-50 to-sky-50 border-l-4 border-blue-400 p-6 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">🚢</span>
+                        June 1 - Embarkation Day
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white/60 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">Morning Tasks</h4>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>Hotel checkout by 12:00 PM</li>
+                                <li>Target/store run for snacks</li>
+                                <li>Lunch nearby (Chipotle recommended)</li>
                             </ul>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">Transport to Port</h4>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li><strong>Address:</strong> 2200 N Cruise Blvd, Miami, FL 33132</li>
+                                <li><strong>Options:</strong> Hotel shuttle or Uber</li>
+                                <li><strong>Target Arrival:</strong> 3:00 PM</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">Important Times</h4>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li><strong>All Aboard:</strong> 5:00 PM</li>
+                                <li><strong>Ship Departure:</strong> 6:00 PM</li>
+                                <li><strong>Safety Drill:</strong> After departure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-50 to-violet-50 border-l-4 border-purple-400 p-6 rounded-lg">
+                    <h3 class="font-semibold text-purple-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">🏠</span>
+                        June 10 - Return Day
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white/60 p-4 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2 flex items-center">
+                                <span class="mr-2">🛬</span>Return Flight
+                            </h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Flight:</span>
+                                    <span>JetBlue B6 706 (A320)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Route:</span>
+                                    <span>Fort Lauderdale → Newark</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Departure:</span>
+                                    <span>8:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Arrival:</span>
+                                    <span>11:04 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Duration:</span>
+                                    <span>3hrs 4mins (Nonstop)</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">Status:</span>
+                                    <span class="status-badge status-confirmed">Confirmed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2 flex items-center">
+                                <span class="mr-2">📋</span>Disembarkation Plan
+                            </h4>
+                            <ul class="list-disc list-inside text-sm space-y-2">
+                                <li><strong>Ship Disembark:</strong> 8:00-10:00 AM</li>
+                                <li><strong>Airport Transport:</strong> Uber/Lyft or shuttle</li>
+                                <li><strong>Buffer Time:</strong> Full day available</li>
+                                <li><strong>Luggage:</strong> Carry-off or express walk-off</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
             
-        <div class="card mb-6">
-            <h2 class="subsection-title">📱 Important Apps & Accounts</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-sky-700 mb-2">MSC for Me App</h3>
-                    <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>Download by May 31</li>
-                        <li>Features:
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Daily schedules</li>
-                                <li>• Restaurant bookings</li>
-                                <li>• Show reservations</li>
-                                <li>• Account balance</li>
-                                <li>• Ship maps</li>
+        <div class="card mb-8">
+            <h2 class="subsection-title">📱 Digital Preparation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 border border-blue-200 p-6 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">📲</span>
+                        MSC for Me App
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-white/70 p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-medium text-sm">Deadline</span>
+                                <span class="status-badge bg-yellow-100 text-yellow-800">May 31</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-medium text-blue-700">Key Features:</h4>
+                            <ul class="list-disc list-inside text-sm space-y-1 text-blue-600">
+                                <li>Daily schedules & activities</li>
+                                <li>Restaurant reservations</li>
+                                <li>Show bookings</li>
+                                <li>Account balance tracking</li>
+                                <li>Interactive ship maps</li>
+                                <li>Port information</li>
                             </ul>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-sky-700 mb-2">Web Check-in</h3>
-                    <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>Complete by May 30 for all accounts</li>
-                        <li>Print embarkation forms</li>
-                        <li>Print luggage tags</li>
-                    </ul>
+                
+                <div class="bg-gradient-to-br from-green-50 to-teal-100 border border-green-200 p-6 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">📝</span>
+                        Web Check-in
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-white/70 p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-medium text-sm">Complete By</span>
+                                <span class="status-badge bg-red-100 text-red-800">May 30</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-medium text-green-700">Required Actions:</h4>
+                            <ul class="list-disc list-inside text-sm space-y-1 text-green-600">
+                                <li>Complete for all passenger accounts</li>
+                                <li>Print embarkation forms</li>
+                                <li>Print luggage tags</li>
+                                <li>Upload passport photos</li>
+                                <li>Add credit card for onboard charges</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mb-6">
-            <h2 class="subsection-title">🌅 Emergency Contacts & Important Numbers</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
+        <div class="card mb-8">
+            <h2 class="subsection-title">🆘 Emergency Contacts & Key Numbers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                    <h3 class="font-semibold text-red-800 mb-3 flex items-center">
+                        <span class="text-xl mr-2">🚨</span>
+                        Emergency Services
+                    </h3>
                     <ul class="list-disc list-inside text-sm space-y-2">
-                        <li><strong>MSC Customer Service:</strong> 1-877-665-4655</li>
-                        <li><strong>Travel Insurance:</strong> [Add policy number]</li>
-                        <li><strong>US Embassy Contacts:</strong>
-                            <ul class="list-none pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>• Bahamas: +1 242-322-1181</li>
-                                <li>• Jamaica: +1 876-702-6000</li>
-                                <li>• Cayman Islands: +1 345-945-8173</li>
-                            </ul>
-                        </li>
-                        <li><strong>Medical Center (Ship):</strong> Deck 4 Forward</li>
-                        <li><strong>Hotel (Pre-Cruise):</strong> +1 954-922-0436</li>
+                        <li><strong>Ship Medical:</strong> Deck 4 Forward</li>
+                        <li><strong>Guest Relations:</strong> Deck 6</li>
+                        <li><strong>MSC 24/7:</strong> 1-877-665-4655</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-3 flex items-center">
+                        <span class="text-xl mr-2">🏛️</span>
+                        US Embassy Contacts
+                    </h3>
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li><strong>Bahamas:</strong> +1 242-322-1181</li>
+                        <li><strong>Jamaica:</strong> +1 876-702-6000</li>
+                        <li><strong>Cayman Islands:</strong> +1 345-945-8173</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-3 flex items-center">
+                        <span class="text-xl mr-2">🏨</span>
+                        Hotel & Travel
+                    </h3>
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li><strong>Hyatt Place FLL:</strong> +1 954-922-0436</li>
+                        <li><strong>Travel Insurance:</strong> [Add policy #]</li>
+                        <li><strong>JetBlue:</strong> 1-800-JETBLUE</li>
                     </ul>
                 </div>
             </div>
         </div>
             
-        <h2 class="subsection-title">📺 YouTube Research Recommendations</h2>
-        <p class="mb-4">Get familiar with the ship and gain tips from fellow cruisers. Search for these types of videos:</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            <div class="bg-white rounded-lg shadow p-4">
-                <h3 class="font-semibold text-sky-700 mb-2">🚢 Ship Tours</h3>
-                <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
-                    <li>MSC Seascape full ship tour</li>
-                    <li>Cabin tours and layouts</li>
-                    <li>Pool deck and water features</li>
-                    <li>Dining venues walkthrough</li>
-                </ul>
+        <div class="card mb-8">
+            <h2 class="subsection-title">📺 Pre-Cruise Research Hub</h2>
+            <p class="text-gray-600 mb-6">Get familiar with your ship and destinations through these recommended YouTube searches:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gradient-card p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <h3 class="font-semibold text-sky-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">🚢</span>
+                        Ship Tours & Reviews
+                    </h3>
+                    <ul class="list-disc list-inside text-sm space-y-2 text-gray-700">
+                        <li>MSC Seascape complete ship tour</li>
+                        <li>Cabin tours and room layouts</li>
+                        <li>Pool deck and Aqua Park features</li>
+                        <li>Dining venues comprehensive guide</li>
+                        <li>Entertainment and theater shows</li>
+                    </ul>
+                </div>
+                
+                <div class="gradient-card p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <h3 class="font-semibold text-sky-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">🏝️</span>
+                        Port Destination Guides
+                    </h3>
+                    <ul class="list-disc list-inside text-sm space-y-2 text-gray-700">
+                        <li>Ocean Cay MSC Marine Reserve tips</li>
+                        <li>Nassau, Bahamas excursion reviews</li>
+                        <li>Falmouth, Jamaica port guide</li>
+                        <li>George Town tender process tips</li>
+                        <li>Best shore excursions for families</li>
+                    </ul>
+                </div>
+                
+                <div class="gradient-card p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <h3 class="font-semibold text-sky-800 mb-4 flex items-center text-lg">
+                        <span class="text-2xl mr-3">💡</span>
+                        Pro Tips & Hacks
+                    </h3>
+                    <ul class="list-disc list-inside text-sm space-y-2 text-gray-700">
+                        <li>First-time MSC cruiser essentials</li>
+                        <li>Drink package value analysis</li>
+                        <li>Embarkation day strategies</li>
+                        <li>Money-saving cruise tips</li>
+                        <li>Packing mistakes to avoid</li>
+                    </ul>
+                </div>
             </div>
-            <div class="bg-white rounded-lg shadow p-4">
-                <h3 class="font-semibold text-sky-700 mb-2">🏖️ Port Guides</h3>
-                <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
-                    <li>Ocean Cay tips and activities</li>
-                    <li>Nassau excursion reviews</li>
-                    <li>Falmouth port guide</li>
-                    <li>George Town tender process</li>
-                </ul>
-            </div>
-            <div class="bg-white rounded-lg shadow p-4">
-                <h3 class="font-semibold text-sky-700 mb-2">💡 Tips & Tricks</h3>
-                <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
-                    <li>First-time MSC cruiser tips</li>
-                    <li>Drink package reviews</li>
-                    <li>Embarkation day hacks</li>
-                    <li>Money-saving cruise tips</li>
-                </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="subsection-title">✅ Final Checklist</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-gray-800 mb-3">Before You Leave Home</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Download MSC for Me app</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Complete web check-in</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Print boarding passes & luggage tags</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Notify bank of travel</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Check passport expiration dates</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-gray-800 mb-3">Day of Departure</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Check flight status</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Pack carry-on essentials</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Arrange airport transportation</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Set out-of-office messages</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <span class="text-sm">Double-check hotel shuttle schedule</span>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer class="text-center py-8 text-sm text-gray-500">
-        <p>Happy Cruising on the MSC Seascape! ✨</p>
+    <footer class="text-center py-8 text-sm text-gray-500 bg-white/50">
+        <p class="flex items-center justify-center">
+            <span class="mr-2">🌊</span>
+            Happy Cruising on the MSC Seascape! 
+            <span class="ml-2">✨</span>
+        </p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Checkbox persistence (in memory only)
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // You can add visual feedback here
+                if (this.checked) {
+                    this.parentElement.style.opacity = '0.7';
+                    this.parentElement.style.textDecoration = 'line-through';
+                } else {
+                    this.parentElement.style.opacity = '1';
+                    this.parentElement.style.textDecoration = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
