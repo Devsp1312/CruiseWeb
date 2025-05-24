@@ -54,14 +54,28 @@ function initializeWeatherChart() {
             labels: ['Miami', 'Ocean Cay', 'Nassau', 'Falmouth', 'George Town'],
             datasets: [
                 { 
-                    label: 'Avg High Temp (°C)', 
-                    data: [32, 31, 30, 31, 29], 
-                    backgroundColor: 'rgba(255, 99, 132, 0.7)'
+            label: 'Avg High Temp (°C)',
+            data: [32, 31, 30, 31, 29],
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            datalabels: {
+                align: 'end',
+                anchor: 'end'
+            },
+            element: {
+                className: (ctx) => weatherData.labels[ctx.dataIndex] === 'Miami' ? 'miami-marker' : 'destination-marker'
+            }
                 },
                 { 
-                    label: 'Avg Low Temp (°C)', 
-                    data: [24, 24, 24.5, 25.5, 26], 
-                    backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                    label: 'Avg Low Temp (°C)',
+                    data: [24, 24, 24.5, 25.5, 26],
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    datalabels: {
+                        align: 'end',
+                        anchor: 'end'
+                    },
+                    element: {
+                        className: (ctx) => weatherData.labels[ctx.dataIndex] === 'Miami' ? 'miami-marker' : 'destination-marker'
+                    }
                 }
             ]
         };
