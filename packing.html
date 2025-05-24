@@ -90,17 +90,47 @@
             </div>
         </div>
 
+        <!-- Baggage Size Requirements -->
+        <div class="card mb-6">
+            <h2 class="subsection-title text-sky-800">📏 JetBlue Baggage Dimensions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-700 text-sm mb-2">🎒 Carry-On</h3>
+                    <div class="text-2xl font-bold text-blue-600">22x14x9"</div>
+                    <div class="text-xs text-gray-600">Including handles & wheels</div>
+                </div>
+                <div class="p-4 bg-green-50 rounded-lg">
+                    <h3 class="font-semibold text-green-700 text-sm mb-2">👜 Personal Item</h3>
+                    <div class="text-2xl font-bold text-green-600">17x13x8"</div>
+                    <div class="text-xs text-gray-600">Must fit under seat</div>
+                </div>
+                <div class="p-4 bg-purple-50 rounded-lg">
+                    <h3 class="font-semibold text-purple-700 text-sm mb-2">🧳 Checked Bag</h3>
+                    <div class="text-2xl font-bold text-purple-600">62 linear"</div>
+                    <div class="text-xs text-gray-600">Length + width + height</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Weight Calculator -->
         <div class="card weight-calculator mb-6">
             <h2 class="subsection-title text-amber-800">⚖️ Luggage Weight Calculator</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                    <label class="block text-sm font-medium text-amber-800 mb-2">Checked Bag Weight (lbs)</label>
-                    <input type="number" id="checked-weight" class="w-full p-2 border border-amber-300 rounded-md" placeholder="0" max="50">
+                    <label class="block text-sm font-medium text-amber-800 mb-2">
+                        Checked Bag Weight (lbs) 
+                        <span class="text-xs">(Standard: ≤50lbs, Mint: ≤70lbs)</span>
+                    </label>
+                    <input type="number" id="checked-weight" class="w-full p-2 border border-amber-300 rounded-md" 
+                           placeholder="0" max="70">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-amber-800 mb-2">Carry-on Weight (lbs)</label>
-                    <input type="number" id="carryon-weight" class="w-full p-2 border border-amber-300 rounded-md" placeholder="0" max="22">
+                    <label class="block text-sm font-medium text-amber-800 mb-2">
+                        Carry-on Weight (lbs) 
+                        <span class="text-xs">(Max 22lbs)</span>
+                    </label>
+                    <input type="number" id="carryon-weight" class="w-full p-2 border-amber-300 rounded-md" 
+                           placeholder="0" max="22">
                 </div>
                 <div class="flex items-end">
                     <div class="w-full p-3 bg-white rounded-md border border-amber-300">
@@ -678,16 +708,23 @@
                 let status = '';
                 let statusClass = '';
 
-                if (checkedWeight > 50) {
-                    status = '⚠️ Checked bag over 50lb limit!';
-                    statusClass = 'text-red-600 font-semibold';
-                } else if (carryonWeight > 22) {
+                const maxCheckedWeight = 50; // Standard limit
+                const mintLimit = 70; // Mint class limit
+                const maxCarryonWeight = 22;
+
+                if (checkedWeight > mintLimit) {
+                    status = '🚫 Over 70lb Mint limit! Not allowed';
+                    statusClass = 'text-red-600 font-bold';
+                } else if (checkedWeight > maxCheckedWeight) {
+                    status = '⚠️ Over 50lb standard limit ($150 fee)';
+                    statusClass = 'text-orange-600 font-semibold';
+                } else if (carryonWeight > maxCarryonWeight) {
                     status = '⚠️ Carry-on over 22lb limit!';
                     statusClass = 'text-red-600 font-semibold';
                 } else if (totalWeight > 60) {
                     status = '⚠️ Consider redistributing weight';
                     statusClass = 'text-yellow-600 font-semibold';
-                } else if (totalWeight > 0) {
+                } else {
                     status = '✅ Within weight limits';
                     statusClass = 'text-green-600 font-semibold';
                 }
